@@ -1,7 +1,9 @@
 const extendDatetimePicker = function (conf) {
-  console.log(conf.framework.components)
   if (conf.framework.components.indexOf('QInput')) {
     conf.boot.push('~quasar-app-extension-qstyles/src/boot/qstyle-input.js')
+  }
+  if (conf.framework.components.indexOf('QField')) {
+    conf.boot.push('~quasar-app-extension-qstyles/src/boot/qstyle-field.js')
   }
   conf.build.transpileDependencies.push(/quasar-app-extension-qstyles[\\/]src/)
 }
