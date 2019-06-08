@@ -1,36 +1,32 @@
 import Vue from 'vue'
-import { StyleClass, styleState, styleMixin } from 'quasar-app-extension-qstyles/src/styles/index.js'
+import { FieldProps, fieldState, fieldMixin } from 'quasar-app-extension-qstyles/src/styles/field.js'
 
-class InputClass {
-  hideBottomSpace = undefined
-  rounded = undefined
-  square = undefined
-  dense = undefined
+class InputProps {
   inputClass = undefined
   inputStyle = undefined
 }
 
-let instance = new InputClass()
+let instance = new InputProps()
 let inputState = Vue.observable({
-  ...new StyleClass(),
-  ...new InputClass()
+  ...new FieldProps(),
+  ...new InputProps()
 })
 
 let computed = {}
 Object.keys(instance).forEach(key => {
   computed['__' + key] = function () {
-    return this.__getStyleProp(this[key], key)
+    return this.__getStyleProp(this.$attrs[key], key)
   }
 })
 
 var inputMixin = {
-  mixins: [ styleMixin ],
+  mixins: [ fieldMixin ],
   computed: computed,
   methods: {
     __getStyleProp (value, name) {
-      return value || inputState[name] || styleState[name]
+      return value || inputState[name] || fieldState[name]
     }
   }
 }
 
-export { InputClass, inputState, inputMixin }
+export { FieldProps, inputState, inputMixin }

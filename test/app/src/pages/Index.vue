@@ -1,36 +1,105 @@
 <template>
-  <q-page class="flex flex-center">
-    <div style="width: 600px">
-      <q-card flat bordered class="full-width q-mb-md">
+  <q-page class="flex q-pa-md">
+    <div class="full-width">
+      <q-card flat bordered class="full-width q-mb-md" :class="{ 'bg-grey-10': field.dark }">
         <q-card-section>
-          <div class="text-h6">Settings</div>
-        </q-card-section>
-        <q-separator inset />
-        <q-card-section class="q-gutter-md q-pb-md q-pr-md row">
-          <q-checkbox v-model="dark" label="Dark" />
-          <q-checkbox v-model="filled" label="Filled" />
-          <q-checkbox v-model="outlined" label="Outlined" />
-          <q-checkbox v-model="borderless" label="Borderless" />
-          <q-checkbox v-model="standout" label="Standout" />
-        </q-card-section>
-      </q-card>
-      <q-card flat bordered class="full-width q-mb-md" :class="{ 'bg-grey-10': dark }">
-        <q-card-section>
-          <div class="text-h6">Inputs</div>
+          <div class="text-h6" :class="{ 'text-white': field.dark }">Field Settings</div>
         </q-card-section>
         <q-separator inset />
         <div class="row">
-          <div class="col-6 q-pa-md">
-            <q-field label="Standard" stack-label>
-              <template v-slot:control>
-                <div class="self-center full-width no-outline" tabindex="0">Field</div>
-              </template>
-            </q-field>
+          <div class="col-4 q-pa-md">
+            <q-input v-model="field.color" label="Color" />
           </div>
-          <div class="col-6 q-pa-md">
-            <q-input v-model="text" label="input" />
+          <div class="col-4 q-pa-md">
+            <q-input v-model="field.bgColor" label="BG Color" />
+          </div>
+          <div class="col-4 q-pa-md">
+            <q-input v-model="field.standoutClass" label="Standout Class" />
+          </div>
+          <div class="col-12 q-pa-md q-gutter-md">
+            <q-checkbox v-model="field.dark" label="Dark" />
+            <q-checkbox v-model="field.filled" label="Filled" />
+            <q-checkbox v-model="field.outlined" label="Outlined" />
+            <q-checkbox v-model="field.borderless" label="Borderless" />
+            <q-checkbox v-model="field.standout" label="Standout" />
+            <q-checkbox v-model="field.hideBottomSpace" label="Hide Bottom Space" />
+            <q-checkbox v-model="field.rounded" label="Rounded" />
+            <q-checkbox v-model="field.square" label="Square" />
+            <q-checkbox v-model="field.dense" label="Dense" />
           </div>
         </div>
+      </q-card>
+      <q-card flat bordered class="full-width q-mb-md" :class="{ 'bg-grey-10': field.dark }">
+        <q-card-section>
+          <div class="text-h6" :class="{ 'text-white': field.dark }">Form Components</div>
+        </q-card-section>
+        <q-separator inset />
+        <q-tabs v-model="formTab" align="justify" narrow-indicator >
+          <q-tab name="demo" label="Demo" />
+          <q-tab name="code" label="Code" />
+        </q-tabs>
+        <q-tab-panels v-model="formTab" animated>
+          <q-tab-panel name="demo">
+            <div class="row">
+              <div class="col-6 q-pa-md">
+                <q-field label="Standard" stack-label />
+              </div>
+              <div class="col-6 q-pa-md">
+                <q-input v-model="text" label="input" />
+              </div>
+            </div>
+          </q-tab-panel>
+          <q-tab-panel name="code">
+            <q-markdown>
+            {{formHtml}}
+            </q-markdown>
+          </q-tab-panel>
+        </q-tab-panels>
+      </q-card>
+      <q-card flat bordered class="full-width q-mb-md" :class="{ 'bg-grey-10': field.dark }">
+        <q-card-section>
+          <div class="text-h6" :class="{ 'text-white': field.dark }">Fields - Override Defaults</div>
+        </q-card-section>
+        <q-separator inset />
+        <q-tabs v-model="fieldTab" align="justify" narrow-indicator >
+          <q-tab name="demo" label="Demo" />
+          <q-tab name="code" label="Code" />
+        </q-tabs>
+        <q-tab-panels v-model="fieldTab" animated>
+          <q-tab-panel name="demo">
+            <div class="row">
+              <div class="col-6 q-pa-md">
+                <q-field :filled="false" :outlined="false" :borderless="false" :standout="false" label="Standard Field" />
+              </div>
+              <div class="col-6 q-pa-md">
+                <q-field filled label="Filled Field" />
+              </div>
+              <div class="col-6 q-pa-md">
+                <q-field outlined label="Outlined Field" />
+              </div>
+              <div class="col-6 q-pa-md">
+                <q-field borderless label="Borderless Field" />
+              </div>
+              <div class="col-6 q-pa-md">
+                <q-field standout label="Standout Field" />
+              </div>
+              <div class="col-6 q-pa-md">
+                <q-field rounded :square="false" label="Rounded Field" />
+              </div>
+              <div class="col-6 q-pa-md">
+                <q-field square label="Square Field" />
+              </div>
+              <div class="col-6 q-pa-md">
+                <q-field dense label="Dense Field" />
+              </div>
+            </div>
+          </q-tab-panel>
+          <q-tab-panel name="code">
+            <q-markdown>
+            {{fieldHtml}}
+            </q-markdown>
+          </q-tab-panel>
+        </q-tab-panels>
       </q-card>
     </div>
   </q-page>
@@ -40,25 +109,59 @@
 </style>
 
 <script>
-import { styleState } from 'quasar-app-extension-qstyles/src/styles/index'
+import { fieldState } from 'quasar-app-extension-qstyles/src/styles/field'
+
 export default {
   name: 'PageIndex',
   data () {
     return {
       text: '',
-      dark: false,
-      filled: false,
-      outlined: false,
-      borderless: false,
-      standout: false
+      field: fieldState,
+      formTab: 'demo',
+      formHtml: `
+\`\`\`html
+<div class="row">
+  <div class="col-6 q-pa-md">
+    <q-field label="Standard" stack-label />
+  </div>
+  <div class="col-6 q-pa-md">
+    <q-input v-model="text" label="input" />
+  </div>
+</div>
+\`\`\`
+      `,
+      fieldTab: 'demo',
+      fieldHtml: `
+\`\`\`html 
+<div class="row">
+  <div class="col-6 q-pa-md">
+    <q-field :filled="false" :outlined="false" :borderless="false" :standout="false" label="Standard Field" />
+  </div>
+  <div class="col-6 q-pa-md">
+    <q-field filled label="Filled Field" />
+  </div>
+  <div class="col-6 q-pa-md">
+    <q-field outlined label="Outlined Field" />
+  </div>
+  <div class="col-6 q-pa-md">
+    <q-field borderless label="Borderless Field" />
+  </div>
+  <div class="col-6 q-pa-md">
+    <q-field standout label="Standout Field" />
+  </div>
+  <div class="col-6 q-pa-md">
+    <q-field rounded :square="false" label="Rounded Field" />
+  </div>
+  <div class="col-6 q-pa-md">
+    <q-field square label="Square Field" />
+  </div>
+  <div class="col-6 q-pa-md">
+    <q-field dense label="Dense Field" />
+  </div>
+</div>
+\`\`\`
+      `
     }
-  },
-  watch: {
-    dark () { styleState.dark = this.dark },
-    filled () { styleState.filled = this.filled },
-    outlined () { styleState.outlined = this.outlined },
-    borderless () { styleState.borderless = this.borderless },
-    standout () { styleState.standout = this.standout }
   }
 }
 </script>

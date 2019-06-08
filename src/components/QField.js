@@ -11,10 +11,11 @@ export default function (ssrContext) {
     mixins: [ fieldMixin ],
     render (h) {
       let self = this
-      let { ...attrs } = this.$attrs
+      let attrs = self.__getAttrs(self, fieldState, this.$attrs)
       let { ...listeners } = this.$listeners
       let { ...scopedSlots } = this.$scopedSlots
-      let props = self.__getProps(fieldState, this.$props || {})
+      let { ...props } = this.$props || {}
+
       return h(QField, {
         props: props,
         attrs: attrs,

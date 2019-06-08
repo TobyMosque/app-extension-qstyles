@@ -1,3 +1,4 @@
 {
-  "qstyles": {}
+  "qstyles": {},
+  "@quasar/qmarkdown": {}
 }

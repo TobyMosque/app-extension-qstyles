@@ -44,7 +44,11 @@ module.exports = function (ctx) {
         'QCheckbox',
         'QCard',
         'QCardSection',
-        'QSeparator'
+        'QSeparator',
+        'QTabs',
+        'QTab',
+        'QTabPanels',
+        'QTabPanel'
       ],
 
       directives: [

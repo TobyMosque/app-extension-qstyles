@@ -15,15 +15,18 @@ export default function (ssrContext) {
     computed: {
       __value: {
         get () { return this.value },
-        set (value) { this.$input('input', value) }
+        set (value) {
+          this.$emit('input', value)
+        }
       }
     },
     render (h) {
       let self = this
-      let { ...attrs } = this.$attrs
+      let attrs = self.__getAttrs(self, inputState, this.$attrs)
       let { input, ...listeners } = this.$listeners
       let { ...scopedSlots } = this.$scopedSlots
-      let props = self.__getProps(inputState, this.$props || {})
+      let { value, ...props } = (this.$props || {})
+      props.value = self.__value
       listeners.input = (value) => {
         self.__value = value
       }
