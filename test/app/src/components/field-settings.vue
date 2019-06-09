@@ -171,20 +171,24 @@ export default {
       html: `
 \`\`\`html
 <q-tabs v-model="tabSettings" align="justify" narrow-indicator >
-  <q-tab name="field" label="Field" />
-  <q-tab name="input" label="Input" />
-  <q-tab name="select" label="Select" />
+  <q-tab name="field" label="Field Common" />
+  <q-tab name="fieldAlt" label="Field Others" />
+  <q-tab name="button" label="Button Common" />
+  <q-tab name="buttonAlt" label="Button Others" />
 </q-tabs>
 <q-tab-panels v-model="tabSettings" animated :class="{ 'bg-grey-10': basic.dark, 'text-white': basic.dark }">
   <q-tab-panel name="field">
     <div class="row">
-      <div class="col-4 q-pa-md">
+      <div class="col-6 q-pa-md">
         <q-input v-model="basic.color" label="Color" />
       </div>
-      <div class="col-4 q-pa-md">
+      <div class="col-6 q-pa-md">
+        <q-input v-model="basic.textColor" label="Text Color" />
+      </div>
+      <div class="col-6 q-pa-md">
         <q-input v-model="field.bgColor" label="BG Color" />
       </div>
-      <div class="col-4 q-pa-md">
+      <div class="col-6 q-pa-md">
         <q-input v-model="field.standoutClass" label="Standout Class" />
       </div>
       <div class="col-12 q-pa-md q-gutter-md">
@@ -200,7 +204,8 @@ export default {
       </div>
     </div>
   </q-tab-panel>
-  <q-tab-panel name="input">
+  <q-tab-panel name="fieldAlt">
+    <div class="text-h6" >Input</div>
     <div class="row">
       <div class="col-6 q-pa-md">
         <q-input v-model="input.inputClass" label="Input Class" />
@@ -209,8 +214,7 @@ export default {
         <q-input v-model="input.inputStyle" label="Input Style" />
       </div>
     </div>
-  </q-tab-panel>
-  <q-tab-panel name="select">
+    <div class="text-h6" >Select</div>
     <div class="row">
       <div class="col-6 q-pa-md">
         <q-input v-model="select.popupContentClass" label="Popup Content Class" />
@@ -219,25 +223,96 @@ export default {
         <q-input v-model="select.popupContentStyle" label="Popup Content Style" />
       </div>
     </div>
+    <div class="text-h6" >Slider</div>
+    <div class="row">
+      <div class="col-6 q-pa-md">
+        <q-input v-model="slider.labelColor" label="Label Color" />
+      </div>
+    </div>
+    <div class="text-h6" >Date</div>
+    <div class="row">
+      <div class="col-6 q-pa-md">
+        <q-input v-model="date.eventColor" label="Event Color" />
+      </div>
+    </div>
+  </q-tab-panel>
+  <q-tab-panel name="button">
+    <div class="row">
+      <div class="col-4 q-pa-md">
+        <q-input v-model="btnCommon.color" label="Color" />
+      </div>
+      <div class="col-4 q-pa-md">
+        <q-input v-model="btnCommon.textColor" label="Text Color" />
+      </div>
+      <div class="col-4 q-pa-md">
+        <q-input v-model="btnCommon.size" label="Size" />
+      </div>
+      <div class="col-12 q-pa-md q-gutter-md">
+        <q-checkbox v-model="btnCommon.ripple" label="Ripple" />
+        <q-checkbox v-model="btn.round" label="Round" />
+        <q-checkbox v-model="btnGroup.outline" label="Outline" />
+        <q-checkbox v-model="btnGroup.flat" label="Flat" />
+        <q-checkbox v-model="btnGroup.unelevated" label="Unelevated" />
+        <q-checkbox v-model="btnGroup.rounded" label="Rounded" />
+        <q-checkbox v-model="btnGroup.push" label="Push" />
+        <q-checkbox v-model="btnGroup.glossy" label="Glossy" />
+        <q-checkbox v-model="btn.fab" label="Fab" />
+        <q-checkbox v-model="btn.fabMini" label="Fab Mini" />
+      </div>
+    </div>
+  </q-tab-panel>
+  <q-tab-panel name="buttonAlt">
+    <div class="text-h6" >Dropdown</div>
+    <div class="row">
+      <div class="col-6 q-pa-md">
+        <q-input v-model="btnDropdown.contentClass" label="Content Class" />
+      </div>
+      <div class="col-6 q-pa-md">
+        <q-input v-model="btnDropdown.contentStyle" label="Content Style" />
+      </div>
+    </div>
+    <div class="text-h6" >Toggle</div>
+    <div class="row">
+      <div class="col-6 q-pa-md">
+        <q-input v-model="btnToggle.toggleColor" label="Toggle Class" />
+      </div>
+      <div class="col-6 q-pa-md">
+        <q-input v-model="btnToggle.toggleTextColor" label="Toggle Text Style" />
+      </div>
+    </div>
   </q-tab-panel>
 </q-tab-panels>
 \`\`\`
       `,
       code: `
 \`\`\`js
-import { basicState } from 'quasar-app-extension-qstyles/src/styles/basic'
-import { fieldState } from 'quasar-app-extension-qstyles/src/styles/field'
-import { inputState } from 'quasar-app-extension-qstyles/src/styles/input'
-import { selectState } from 'quasar-app-extension-qstyles/src/styles/select'
+import { state as basicState } from 'quasar-app-extension-qstyles/src/styles/basic'
+import { state as btnCommonState } from 'quasar-app-extension-qstyles/src/styles/btn-common'
+import { state as btnState } from 'quasar-app-extension-qstyles/src/styles/btn'
+import { state as btnGroupState } from 'quasar-app-extension-qstyles/src/styles/btn-group'
+import { state as btnDropdownState } from 'quasar-app-extension-qstyles/src/styles/btn-dropdown'
+import { state as btnToggleState } from 'quasar-app-extension-qstyles/src/styles/btn-toggle'
+import { state as fieldState } from 'quasar-app-extension-qstyles/src/styles/field'
+import { state as inputState } from 'quasar-app-extension-qstyles/src/styles/input'
+import { state as selectState } from 'quasar-app-extension-qstyles/src/styles/select'
+import { state as sliderState } from 'quasar-app-extension-qstyles/src/styles/slider'
+import { state as dateState } from 'quasar-app-extension-qstyles/src/styles/date'
 
 export default {  
 name: 'PageIndex',
   data () {
     return {
       basic: basicState,
+      btnCommon: btnCommonState,
+      btn: btnState,
+      btnGroup: btnGroupState,
+      btnDropdown: btnDropdownState,
+      btnToggle: btnToggleState,
       field: fieldState,
       input: inputState,
       select: selectState,
+      slider: sliderState,
+      date: dateState
     }
   }
 }
