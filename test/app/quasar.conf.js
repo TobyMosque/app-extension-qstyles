@@ -6,7 +6,8 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     boot: [
       'i18n',
-      'axios'
+      'axios',
+      'styles'
     ],
 
     css: [
@@ -34,25 +35,36 @@ module.exports = function (ctx) {
         'QToolbar',
         'QToolbarTitle',
         'QBtn',
+        'QBtnGroup',
+        'QBtnDropdown',
+        'QBtnToggle',
         'QIcon',
         'QList',
         'QItem',
         'QItemSection',
         'QItemLabel',
+        'QSelect',
         'QInput',
         'QField',
         'QCheckbox',
+        'QOptionGroup',
+        'QSlider',
+        'QRange',
+        'QBadge',
         'QCard',
         'QCardSection',
         'QSeparator',
         'QTabs',
         'QTab',
         'QTabPanels',
-        'QTabPanel'
+        'QTabPanel',
+        'QDate',
+        'QTime'
       ],
 
       directives: [
-        'Ripple'
+        'Ripple',
+        'ClosePopup'
       ],
 
       // Quasar plugins

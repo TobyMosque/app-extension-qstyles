@@ -1,10 +1,29 @@
 const extendDatetimePicker = function (conf) {
-  if (conf.framework.components.indexOf('QInput')) {
-    conf.boot.push('~quasar-app-extension-qstyles/src/boot/qstyle-input.js')
-  }
-  if (conf.framework.components.indexOf('QField')) {
-    conf.boot.push('~quasar-app-extension-qstyles/src/boot/qstyle-field.js')
-  }
+  let components = [
+    'QBadge',
+    'QBtn',
+    'QBtnGroup',
+    'QBtnDropdown',
+    'QInput',
+    'QField',
+    'QInput',
+    'QField',
+    'QSelect',
+    'QRadio',
+    'QCheckbox',
+    'QToggle',
+    'QBtnToggle',
+    'QOptionGroup',
+    'QRange',
+    'QSlider',
+    'QDate',
+    'QTime'
+  ]
+  components.forEach(component => {
+    if (conf.framework.components.indexOf(component)) {
+      conf.boot.push('~quasar-app-extension-qstyles/src/boot/' + component + '.js')
+    }
+  })
   conf.build.transpileDependencies.push(/quasar-app-extension-qstyles[\\/]src/)
 }
 
