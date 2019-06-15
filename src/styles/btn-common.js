@@ -1,10 +1,11 @@
 import StyleFactory from './StyleFactory'
-import { state as basicState } from 'quasar-app-extension-qstyles/src/styles/basic.js'
-import { Model as BaseModel, state as btnGroupState, mixin as btnGroupMixin } from 'quasar-app-extension-qstyles/src/styles/btn-group.js'
+import baseState from 'quasar-app-extension-qstyles/src/styles/base.js'
+import btnGroupState, { Model as BaseModel, mixin as baseMixin } from 'quasar-app-extension-qstyles/src/styles/btn-group.js'
 
 class Model extends BaseModel {
-  ripple = undefined
-  size = undefined
+  ripple = void 0
+  size = void 0
 }
-let { state, mixin } = StyleFactory(Model, BaseModel, btnGroupMixin, [ btnGroupState, basicState ], {}, undefined)
-export { Model, state, mixin }
+let { state, mixin } = StyleFactory({ Model, BaseModel, baseMixin, baseStates: [ btnGroupState, baseState ] })
+export default state
+export { Model, mixin }

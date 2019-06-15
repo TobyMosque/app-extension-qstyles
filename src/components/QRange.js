@@ -1,5 +1,5 @@
 import ComponentFactory from './ComponentFactory'
-import { state, mixin } from 'quasar-app-extension-qstyles/src/styles/range.js'
+import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/range.js'
 import { QRange } from 'quasar'
 
 export default function (ssrContext) {

@@ -1,18 +1,17 @@
 // import something here
-import { state as btnCommonState } from 'quasar-app-extension-qstyles/src/styles/btn-common'
-import { state as basicState } from 'quasar-app-extension-qstyles/src/styles/basic'
-import { state as fieldState } from 'quasar-app-extension-qstyles/src/styles/field'
 import { colors } from 'quasar'
+import { themes, field, base, card, btnCommon, separator } from 'quasar-app-extension-qstyles/styles'
 
 // "async" is optional
 export default async (context) => {
+  themes.dark = 'bg-grey-9 text-white'
   colors.setBrand('primary', '#009688')
   colors.setBrand('secondary', '#673ab7')
-  btnCommonState.color = 'secondary'
-  basicState.dark = true
-  basicState.color = 'primary'
-  fieldState.filled = false
-  fieldState.borderless = false
-  fieldState.standout = false
-  fieldState.outlined = true
+  btnCommon.color = 'secondary'
+  base.dark = true
+  base.color = 'primary'
+  field.outlined = true
+  card.flat = true
+  card.bordered = true
+  separator.color = null
 }

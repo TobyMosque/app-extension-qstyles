@@ -1,13 +1,14 @@
 import StyleFactory from './StyleFactory'
-import { Model as BaseModel, state as basicState, mixin as basicMixin } from 'quasar-app-extension-qstyles/src/styles/basic.js'
+import baseState, { Model as BaseModel, mixin as baseMixin } from 'quasar-app-extension-qstyles/src/styles/base.js'
 
 class Model extends BaseModel {
-  outline = undefined
-  flat = undefined
-  unelevated = undefined
-  rounded = undefined
-  push = undefined
-  glossy = undefined
+  outline = void 0
+  flat = void 0
+  unelevated = void 0
+  rounded = void 0
+  push = void 0
+  glossy = void 0
 }
-let { state, mixin } = StyleFactory(Model, BaseModel, basicMixin, [ basicState ], {}, undefined)
-export { Model, state, mixin }
+let { state, mixin } = StyleFactory({ Model, BaseModel, baseMixin, baseStates: [ baseState ] })
+export default state
+export { Model, mixin }

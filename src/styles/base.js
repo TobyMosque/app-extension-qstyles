@@ -1,13 +1,13 @@
 import StyleFactory from './StyleFactory'
 
 class Model {
-  color = undefined
-  dark = undefined
-  dense = undefined
-  textColor = undefined
+  color = void 0
+  dark = void 0
+  dense = void 0
+  textColor = void 0
 }
 
-let { state, mixin } = StyleFactory(Model, undefined, undefined, [], {
+let { state, mixin } = StyleFactory({ Model, methods: {
   __getAttrs (self, state, attrs) {
     let stateKeys = Object.keys(state)
     let attrsKeys = Object.keys(attrs)
@@ -23,6 +23,6 @@ let { state, mixin } = StyleFactory(Model, undefined, undefined, [], {
     })
     return __attrs
   }
-}, undefined)
-console.log(Model, state, mixin)
-export { Model, state, mixin }
+} })
+export default state
+export { Model, mixin }

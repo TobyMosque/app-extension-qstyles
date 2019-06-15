@@ -1,10 +1,20 @@
 import StyleFactory from './StyleFactory'
-import { state as basicState } from 'quasar-app-extension-qstyles/src/styles/basic.js'
-import { Model as BaseModel, state as fieldState, mixin as fieldMixin } from 'quasar-app-extension-qstyles/src/styles/field.js'
+import themesState from 'quasar-app-extension-qstyles/src/styles/themes.js'
+import baseState from 'quasar-app-extension-qstyles/src/styles/base.js'
+import fieldState, { Model as BaseModel, mixin as baseMixin } from 'quasar-app-extension-qstyles/src/styles/field.js'
 
 class Model extends BaseModel {
-  popupContentClass = undefined
-  popupContentStyle = undefined
+  popupContentClass = void 0
+  popupContentStyle = void 0
 }
-let { state, mixin } = StyleFactory(Model, BaseModel, fieldMixin, [ fieldState, basicState ], {}, undefined)
-export { Model, state, mixin }
+let { state, mixin } = StyleFactory({ Model, BaseModel, baseMixin, baseStates: [ fieldState, baseState ], 
+  cbComputed (computed) {
+    computed.__popupContentClass = function () {
+      let dark = this.__getStyleProp(this.$attrs.dark, 'dark')
+      let classes = dark ? themesState.dark : themesState.light
+      return this.__getStyleProp(this.$attrs.popupContentClass, 'popupContentClass') || classes
+    }
+  }
+})
+export default state
+export { Model, mixin }

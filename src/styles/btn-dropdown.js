@@ -1,12 +1,23 @@
 import StyleFactory from './StyleFactory'
-import { state as basicState } from 'quasar-app-extension-qstyles/src/styles/basic.js'
-import { state as btnGroupState } from 'quasar-app-extension-qstyles/src/styles/btn-group.js'
-import { state as btnCommonState } from 'quasar-app-extension-qstyles/src/styles/btn-common.js'
-import { Model as BaseModel, state as btnState, mixin as btnMixin } from 'quasar-app-extension-qstyles/src/styles/btn.js'
+import themesState from 'quasar-app-extension-qstyles/src/styles/themes.js'
+import baseState from 'quasar-app-extension-qstyles/src/styles/base.js'
+import btnGroupState from 'quasar-app-extension-qstyles/src/styles/btn-group.js'
+import btnCommonState from 'quasar-app-extension-qstyles/src/styles/btn-common.js'
+import btnState, { Model as BaseModel, mixin as baseMixin } from 'quasar-app-extension-qstyles/src/styles/btn.js'
 
 class Model extends BaseModel {
-  contentStyle = undefined
-  contentClass = undefined
+  contentStyle = void 0
+  contentClass = void 0
 }
-let { state, mixin } = StyleFactory(Model, BaseModel, btnMixin, [ btnState, btnCommonState, btnGroupState, basicState ], {}, undefined)
-export { Model, state, mixin }
+let { state, mixin } = StyleFactory({ Model, BaseModel, baseMixin, baseStates: [ btnState, btnCommonState, btnGroupState, baseState ], 
+  cbComputed (computed) {
+    computed.__contentClass = function () {
+      let dark = this.__getStyleProp(this.$attrs.dark, 'dark')
+      let classes = dark ? themesState.dark : themesState.light
+      let contentClass = this.__getStyleProp(this.$attrs.contentClass, 'contentClass')
+      return contentClass || classes
+    }
+  } 
+})
+export default state
+export { Model, mixin }

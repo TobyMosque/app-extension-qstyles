@@ -1,5 +1,5 @@
 <template>
-  <q-card flat bordered class="full-width q-mb-md" :class="{ 'bg-grey-10': basic.dark, 'text-white': basic.dark }">
+  <q-card class="full-width q-mb-md">
     <q-card-section>
       <div class="text-h6">Fields - Override Defaults</div>
     </q-card-section>
@@ -8,7 +8,7 @@
       <q-tab name="demo" label="Demo" />
       <q-tab name="html" label="Html" />
     </q-tabs>
-    <q-tab-panels v-model="tab" animated :class="{ 'bg-grey-10': basic.dark, 'text-white': basic.dark }">
+    <q-tab-panels v-model="tab" animated :class="base.dark ? themes.dark : themes.light">
       <q-tab-panel name="demo">
         <div class="row">
           <div class="col-6 q-pa-md">
@@ -47,13 +47,14 @@
 </template>
 
 <script>
-import { state as basicState } from 'quasar-app-extension-qstyles/src/styles/basic'
+import { base, themes } from 'quasar-app-extension-qstyles/styles'
 
 export default {
   name: 'ComponentFieldOverrideDemo',
   data () {
     return {
-      basic: basicState,
+      themes: themes,
+      base: base,
       tab: 'demo',
       html: `
 \`\`\`html 

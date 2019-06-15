@@ -1,6 +1,7 @@
 import Vue from 'vue'
+import themes from 'quasar-app-extension-qstyles/src/styles/themes.js'
 
-export default function (ssrContext, name, component, state, mixin, valueProp) {
+export default function (ssrContext, name, component, state, mixin, valueProp, themed) {
   let wrapper = {
     name: name,
     mixins: [ mixin ],
@@ -22,6 +23,10 @@ export default function (ssrContext, name, component, state, mixin, valueProp) {
     let self = this
     let attrs = self.__getAttrs(self, state, this.$attrs)
     let { ...scopedSlots } = this.$scopedSlots
+    let classes = void 0
+    if (themed) {
+      classes = self.__dark ? themes.dark : themes.light
+    }
     if (valueProp) {
       let { input, ...listeners } = this.$listeners
       let { value, ...props } = this.$props || {}
@@ -32,6 +37,7 @@ export default function (ssrContext, name, component, state, mixin, valueProp) {
       return h(component, {
         props: props,
         attrs: attrs,
+        class: classes,
         on: listeners,
         scopedSlots: scopedSlots
       })
@@ -41,6 +47,7 @@ export default function (ssrContext, name, component, state, mixin, valueProp) {
       return h(component, {
         props: props,
         attrs: attrs,
+        class: classes,
         on: listeners,
         scopedSlots: scopedSlots
       })

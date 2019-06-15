@@ -1,9 +1,15 @@
 const extendDatetimePicker = function (conf) {
   let components = [
+    'QAjaxBar',
+    'QAvatar',
     'QBadge',
+    'QBanner',
+    'QBar',
+    'QBreadcrumbs',
     'QBtn',
     'QBtnGroup',
     'QBtnDropdown',
+    'QCard',
     'QInput',
     'QField',
     'QInput',
@@ -16,6 +22,7 @@ const extendDatetimePicker = function (conf) {
     'QOptionGroup',
     'QRange',
     'QSlider',
+    'QSeparator',
     'QDate',
     'QTime'
   ]
@@ -34,3 +41,4 @@ module.exports = function (api) {
   compatibleWith('@quasar/app', '^1.0.0-beta.23')
   api.extendQuasarConf(extendDatetimePicker)
 }
+

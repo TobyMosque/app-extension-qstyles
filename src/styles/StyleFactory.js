@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export default function (Model, BaseModel, baseMixin, baseStates, methods, cbComputed) {
+export default function ({ Model, BaseModel, baseMixin, baseStates, methods, cbComputed }) {
   let instance = new Model()
   let state = Vue.observable(instance)
 
@@ -29,15 +29,18 @@ export default function (Model, BaseModel, baseMixin, baseStates, methods, cbCom
   }
   mixin.methods = methods || {}
   mixin.methods.__getStyleProp = function (value, name) {
-    if (value !== undefined)
+    if (value !== void 0)
       return value
-    if (state[name] !== undefined)
+    if (state[name] !== void 0)
       return state[name]
+    if (!baseStates || baseStates.length <= 0)
+      return void 0
     for (var i = 0; i < baseStates.length; i++) {
       let baseState = baseStates[i]
-      if (baseState[name] !== undefined)
+      if (baseState[name] !== void 0)
         return baseState[name]
     }
+    return void 0
   }
   return { state, mixin }
 }

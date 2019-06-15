@@ -1,5 +1,5 @@
 <template>
-  <q-card flat bordered class="full-width q-mb-md" :class="{ 'bg-grey-10': basic.dark, 'text-white': basic.dark }">
+  <q-card class="full-width q-mb-md">
     <q-card-section>
       <div class="text-h6" >Settings</div>
     </q-card-section>
@@ -9,7 +9,7 @@
       <q-tab name="html" label="Html" />
       <q-tab name="code" label="Code" />
     </q-tabs>
-    <q-tab-panels v-model="tab" animated :class="{ 'bg-grey-10': basic.dark, 'text-white': basic.dark }">
+    <q-tab-panels v-model="tab" animated :class="base.dark ? themes.dark : themes.light">
       <q-tab-panel name="settings" class="q-pa-none">
         <q-tabs v-model="tabSettings" align="justify" narrow-indicator >
           <q-tab name="field" label="Field Common" />
@@ -17,14 +17,14 @@
           <q-tab name="button" label="Button Common" />
           <q-tab name="buttonAlt" label="Button Others" />
         </q-tabs>
-        <q-tab-panels v-model="tabSettings" animated :class="{ 'bg-grey-10': basic.dark, 'text-white': basic.dark }">
+        <q-tab-panels v-model="tabSettings" animated :class="base.dark ? themes.dark : themes.light">
           <q-tab-panel name="field">
             <div class="row">
               <div class="col-6 q-pa-md">
-                <q-input v-model="basic.color" label="Color" />
+                <q-input v-model="base.color" label="Color" />
               </div>
               <div class="col-6 q-pa-md">
-                <q-input v-model="basic.textColor" label="Text Color" />
+                <q-input v-model="base.textColor" label="Text Color" />
               </div>
               <div class="col-6 q-pa-md">
                 <q-input v-model="field.bgColor" label="BG Color" />
@@ -33,7 +33,7 @@
                 <q-input v-model="field.standoutClass" label="Standout Class" />
               </div>
               <div class="col-12 q-pa-md q-gutter-md">
-                <q-checkbox v-model="basic.dark" label="Dark" />
+                <q-checkbox v-model="base.dark" label="Dark" />
                 <q-checkbox v-model="field.filled" label="Filled" />
                 <q-checkbox v-model="field.outlined" label="Outlined" />
                 <q-checkbox v-model="field.borderless" label="Borderless" />
@@ -41,7 +41,7 @@
                 <q-checkbox v-model="field.hideBottomSpace" label="Hide Bottom Space" />
                 <q-checkbox v-model="field.rounded" label="Rounded" />
                 <q-checkbox v-model="field.square" label="Square" />
-                <q-checkbox v-model="basic.dense" label="Dense" />
+                <q-checkbox v-model="base.dense" label="Dense" />
               </div>
             </div>
           </q-tab-panel>
@@ -139,33 +139,24 @@
 </template>
 
 <script>
-import { state as basicState } from 'quasar-app-extension-qstyles/src/styles/basic'
-import { state as btnCommonState } from 'quasar-app-extension-qstyles/src/styles/btn-common'
-import { state as btnState } from 'quasar-app-extension-qstyles/src/styles/btn'
-import { state as btnGroupState } from 'quasar-app-extension-qstyles/src/styles/btn-group'
-import { state as btnDropdownState } from 'quasar-app-extension-qstyles/src/styles/btn-dropdown'
-import { state as btnToggleState } from 'quasar-app-extension-qstyles/src/styles/btn-toggle'
-import { state as fieldState } from 'quasar-app-extension-qstyles/src/styles/field'
-import { state as inputState } from 'quasar-app-extension-qstyles/src/styles/input'
-import { state as selectState } from 'quasar-app-extension-qstyles/src/styles/select'
-import { state as sliderState } from 'quasar-app-extension-qstyles/src/styles/slider'
-import { state as dateState } from 'quasar-app-extension-qstyles/src/styles/date'
+import { base, themes, btnCommon, btn, btnGroup, btnDropdown, btnToggle, field, input, select, slider, date } from 'quasar-app-extension-qstyles/styles'
 
 export default {
   name: 'ComponentFieldSettings',
   data () {
     return {
-      basic: basicState,
-      btnCommon: btnCommonState,
-      btn: btnState,
-      btnGroup: btnGroupState,
-      btnDropdown: btnDropdownState,
-      btnToggle: btnToggleState,
-      field: fieldState,
-      input: inputState,
-      select: selectState,
-      slider: sliderState,
-      date: dateState,
+      themes: themes,
+      base: base,
+      btnCommon: btnCommon,
+      btn: btn,
+      btnGroup: btnGroup,
+      btnDropdown: btnDropdown,
+      btnToggle: btnToggle,
+      field: field,
+      input: input,
+      select: select,
+      slider: slider,
+      date: date,
       tabSettings: 'field',
       tab: 'settings',
       html: `
@@ -176,14 +167,14 @@ export default {
   <q-tab name="button" label="Button Common" />
   <q-tab name="buttonAlt" label="Button Others" />
 </q-tabs>
-<q-tab-panels v-model="tabSettings" animated :class="{ 'bg-grey-10': basic.dark, 'text-white': basic.dark }">
+<q-tab-panels v-model="tabSettings" animated :class="{ 'bg-grey-10': base.dark, 'text-white': base.dark }">
   <q-tab-panel name="field">
     <div class="row">
       <div class="col-6 q-pa-md">
-        <q-input v-model="basic.color" label="Color" />
+        <q-input v-model="base.color" label="Color" />
       </div>
       <div class="col-6 q-pa-md">
-        <q-input v-model="basic.textColor" label="Text Color" />
+        <q-input v-model="base.textColor" label="Text Color" />
       </div>
       <div class="col-6 q-pa-md">
         <q-input v-model="field.bgColor" label="BG Color" />
@@ -192,7 +183,7 @@ export default {
         <q-input v-model="field.standoutClass" label="Standout Class" />
       </div>
       <div class="col-12 q-pa-md q-gutter-md">
-        <q-checkbox v-model="basic.dark" label="Dark" />
+        <q-checkbox v-model="base.dark" label="Dark" />
         <q-checkbox v-model="field.filled" label="Filled" />
         <q-checkbox v-model="field.outlined" label="Outlined" />
         <q-checkbox v-model="field.borderless" label="Borderless" />
@@ -200,7 +191,7 @@ export default {
         <q-checkbox v-model="field.hideBottomSpace" label="Hide Bottom Space" />
         <q-checkbox v-model="field.rounded" label="Rounded" />
         <q-checkbox v-model="field.square" label="Square" />
-        <q-checkbox v-model="basic.dense" label="Dense" />
+        <q-checkbox v-model="base.dense" label="Dense" />
       </div>
     </div>
   </q-tab-panel>
@@ -286,7 +277,7 @@ export default {
       `,
       code: `
 \`\`\`js
-import { state as basicState } from 'quasar-app-extension-qstyles/src/styles/basic'
+import { state as baseState } from 'quasar-app-extension-qstyles/src/styles/base'
 import { state as btnCommonState } from 'quasar-app-extension-qstyles/src/styles/btn-common'
 import { state as btnState } from 'quasar-app-extension-qstyles/src/styles/btn'
 import { state as btnGroupState } from 'quasar-app-extension-qstyles/src/styles/btn-group'
@@ -302,7 +293,7 @@ export default {
 name: 'PageIndex',
   data () {
     return {
-      basic: basicState,
+      base: baseState,
       btnCommon: btnCommonState,
       btn: btnState,
       btnGroup: btnGroupState,

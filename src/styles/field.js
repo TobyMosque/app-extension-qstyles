@@ -1,51 +1,54 @@
 import StyleFactory from './StyleFactory'
-import { Model as BaseModel, state as basicState, mixin as basicMixin } from 'quasar-app-extension-qstyles/src/styles/basic.js'
+import baseState, { Model as BaseModel, mixin as baseMixin } from 'quasar-app-extension-qstyles/src/styles/base.js'
 
 class Model extends BaseModel {
-  bgColor = undefined
-  filled = undefined
-  outlined = undefined
-  borderless = undefined
-  standout = undefined
-  standoutClass = undefined
-  hideBottomSpace = undefined
-  rounded = undefined
-  square = undefined
+  bgColor = void 0
+  filled = void 0
+  outlined = void 0
+  borderless = void 0
+  standout = void 0
+  standoutClass = void 0
+  hideBottomSpace = void 0
+  rounded = void 0
+  square = void 0
 }
-let { state, mixin } = StyleFactory(Model, BaseModel, basicMixin, [ basicState ], {}, computed => {
-  computed.__filled = function () {
-    if (this.$attrs.outlined !== undefined || this.$attrs.borderless !== undefined || this.$attrs.standout !== undefined) {
-      return false
-    }
-    return this.__getStyleProp(this.$attrs.filled, 'filled')
-  }
-  
-  computed.__outlined = function () {
-    if (this.$attrs.filled !== undefined || this.$attrs.borderless !== undefined || this.$attrs.standout !== undefined) {
-      return false
-    }
-    return this.__getStyleProp(this.$attrs.outlined, 'outlined')
-  }
-  
-  computed.__borderless = function () {
-    if (this.$attrs.filled !== undefined || this.$attrs.outlined !== undefined || this.$attrs.standout !== undefined) {
-      return false
-    }
-    return this.__getStyleProp(this.$attrs.borderless, 'borderless')
-  }
-  
-  computed.__standout = function () {
-    if (this.$attrs.filled != undefined || this.$attrs.outlined !== undefined || this.$attrs.borderless !== undefined) {
-      return false
-    }
-    let standout = this.__getStyleProp(this.$attrs.standout, 'standout')
-    if (standout === true) {
-      let standoutClass = this.__getStyleProp(undefined, 'standoutClass')
-      if (standoutClass) {
-        standout = standoutClass
+let { state, mixin } = StyleFactory({ Model, BaseModel, baseMixin, baseStates: [ baseState ], 
+  cbComputed (computed) {
+    computed.__filled = function () {
+      if (this.$attrs.outlined !== void 0 || this.$attrs.borderless !== void 0 || this.$attrs.standout !== void 0) {
+        return false
       }
+      return this.__getStyleProp(this.$attrs.filled, 'filled')
     }
-    return standout
+    
+    computed.__outlined = function () {
+      if (this.$attrs.filled !== void 0 || this.$attrs.borderless !== void 0 || this.$attrs.standout !== void 0) {
+        return false
+      }
+      return this.__getStyleProp(this.$attrs.outlined, 'outlined')
+    }
+    
+    computed.__borderless = function () {
+      if (this.$attrs.filled !== void 0 || this.$attrs.outlined !== void 0 || this.$attrs.standout !== void 0) {
+        return false
+      }
+      return this.__getStyleProp(this.$attrs.borderless, 'borderless')
+    }
+    
+    computed.__standout = function () {
+      if (this.$attrs.filled != void 0 || this.$attrs.outlined !== void 0 || this.$attrs.borderless !== void 0) {
+        return false
+      }
+      let standout = this.__getStyleProp(this.$attrs.standout, 'standout')
+      if (standout === true) {
+        let standoutClass = this.__getStyleProp(void 0, 'standoutClass')
+        if (standoutClass) {
+          standout = standoutClass
+        }
+      }
+      return standout
+    }
   }
 })
-export { Model, state, mixin }
+export default state
+export { Model, mixin }
