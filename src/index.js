@@ -10,6 +10,16 @@ const extendDatetimePicker = function (conf) {
     'QBtnGroup',
     'QBtnDropdown',
     'QCard',
+    'QCarousel',
+    'QChatMessage',
+    'QCheckbox',
+    'QChip',
+    'QCircularProgress',
+    'QColor',
+    'QDate',
+    'QDialog',
+    'QEditor',
+    'QExpansionItem',
     'QInput',
     'QField',
     'QInput',
@@ -32,6 +42,7 @@ const extendDatetimePicker = function (conf) {
     }
   })
   conf.build.transpileDependencies.push(/quasar-app-extension-qstyles[\\/]src/)
+  conf.build.transpileDependencies.push('quasar-app-extension-qstyles/style.js')
 }
 
 module.exports = function (api) {

@@ -1,7 +1,7 @@
-import ComponentFactory from './ComponentFactory'
-import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/input.js'
+import ComponentFactory from './QComponentFactory'
+import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QInput'
 import { QInput } from 'quasar'
 
 export default function (ssrContext) {
-  return ComponentFactory(ssrContext, 'QInput', QInput, state, mixin, [String, Number])
+  return ComponentFactory({ ssrContext, name: 'QInput', component: QInput, state, mixin, valueProp: [String, Number] })
 }

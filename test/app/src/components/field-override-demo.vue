@@ -8,7 +8,7 @@
       <q-tab name="demo" label="Demo" />
       <q-tab name="html" label="Html" />
     </q-tabs>
-    <q-tab-panels v-model="tab" animated :class="base.dark ? themes.dark : themes.light">
+    <q-tab-panels v-model="tab" animated :class="QStyle.dark ? QTheme.dark : QTheme.light">
       <q-tab-panel name="demo">
         <div class="row">
           <div class="col-6 q-pa-md">
@@ -38,54 +38,24 @@
         </div>
       </q-tab-panel>
       <q-tab-panel name="html">
-        <q-markdown>
-        {{html}}
-        </q-markdown>
+        <q-markdown :src="html"></q-markdown>
       </q-tab-panel>
     </q-tab-panels>
   </q-card>
 </template>
 
 <script>
-import { base, themes } from 'quasar-app-extension-qstyles/styles'
+import { QStyle, QTheme } from 'quasar-app-extension-qstyles/src/themer'
+import html from './field-override-demo.html.md'
 
 export default {
   name: 'ComponentFieldOverrideDemo',
   data () {
     return {
-      themes: themes,
-      base: base,
+      QTheme: QTheme,
+      QStyle: QStyle,
       tab: 'demo',
-      html: `
-\`\`\`html 
-<div class="row">
-  <div class="col-6 q-pa-md">
-    <q-field :filled="false" :outlined="false" :borderless="false" :standout="false" label="Standard Field" />
-  </div>
-  <div class="col-6 q-pa-md">
-    <q-field filled label="Filled Field" />
-  </div>
-  <div class="col-6 q-pa-md">
-    <q-field outlined label="Outlined Field" />
-  </div>
-  <div class="col-6 q-pa-md">
-    <q-field borderless label="Borderless Field" />
-  </div>
-  <div class="col-6 q-pa-md">
-    <q-field standout label="Standout Field" />
-  </div>
-  <div class="col-6 q-pa-md">
-    <q-field rounded :square="false" label="Rounded Field" />
-  </div>
-  <div class="col-6 q-pa-md">
-    <q-field square label="Square Field" />
-  </div>
-  <div class="col-6 q-pa-md">
-    <q-field dense label="Dense Field" />
-  </div>
-</div>
-\`\`\`
-      `
+      html: html
     }
   }
 }

@@ -1,7 +1,7 @@
-import ComponentFactory from './ComponentFactory'
-import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/separator.js'
+import ComponentFactory from './QComponentFactory'
+import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QSeparator'
 import { QSeparator } from 'quasar'
 
 export default function (ssrContext) {
-  return ComponentFactory(ssrContext, 'QSeparator', QSeparator, state, mixin, false)
+  return ComponentFactory({ ssrContext, name: 'QSeparator', component: QSeparator, state, mixin })
 }

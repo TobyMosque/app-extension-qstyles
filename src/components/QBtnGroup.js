@@ -1,7 +1,7 @@
-import ComponentFactory from './ComponentFactory'
-import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/btn-group.js'
+import ComponentFactory from './QComponentFactory'
+import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QBtnGroup'
 import { QBtnGroup } from 'quasar'
 
 export default function (ssrContext) {
-  return ComponentFactory(ssrContext, 'QBtnGroup', QBtnGroup, state, mixin, false)
+  return ComponentFactory({ ssrContext, name: 'QBtnGroup', component: QBtnGroup, state, mixin })
 }

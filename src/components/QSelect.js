@@ -1,7 +1,7 @@
-import ComponentFactory from './ComponentFactory'
-import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/select.js'
+import ComponentFactory from './QComponentFactory'
+import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QSelect'
 import { QSelect } from 'quasar'
 
 export default function (ssrContext) {
-  return ComponentFactory(ssrContext, 'QSelect', QSelect, state, mixin, { required: true })
+  return ComponentFactory({ ssrContext, name: 'QSelect', component: QSelect, state, mixin, valueProp: { required: true } })
 }

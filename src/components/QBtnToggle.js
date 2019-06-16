@@ -1,7 +1,7 @@
-import ComponentFactory from './ComponentFactory'
-import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/btn-toggle.js'
+import ComponentFactory from './QComponentFactory'
+import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QBtnToggle'
 import { QBtnToggle } from 'quasar'
 
 export default function (ssrContext) {
-  return ComponentFactory(ssrContext, 'QBtnToggle', QBtnToggle, state, mixin, { required: true })
+  return ComponentFactory({ ssrContext, name: 'QBtnToggle', component: QBtnToggle, state, mixin, valueProp: { required: true } })
 }
