@@ -1,5 +1,5 @@
-import QStyleColor from 'quasar-app-extension-qstyles/src/components/QColor.js'
+import QColor from 'quasar-app-extension-qstyles/src/components/QColor.js'
 
 export default ({ Vue, ssrContext }) => {
-  Vue.component('q-color', QStyleColor(ssrContext))
+  Vue.component('q-color', QColor(ssrContext))
 }

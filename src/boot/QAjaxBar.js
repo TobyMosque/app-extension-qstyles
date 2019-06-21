@@ -1,5 +1,5 @@
-import QStyleAjaxBar from 'quasar-app-extension-qstyles/src/components/QAjaxBar.js'
+import QAjaxBar from 'quasar-app-extension-qstyles/src/components/QAjaxBar.js'
 
 export default ({ Vue, ssrContext }) => {
-  Vue.component('q-ajax-bar', QStyleAjaxBar(ssrContext))
+  Vue.component('q-ajax-bar', QAjaxBar(ssrContext))
 }

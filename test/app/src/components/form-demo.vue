@@ -8,7 +8,7 @@
       <q-tab name="demo" label="Demo" />
       <q-tab name="html" label="Html" />
     </q-tabs>
-    <q-tab-panels v-model="tab" animated :class="QStyle.dark ? QTheme.dark : QTheme.light">
+    <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="demo">
         <div class="row">
           <div class="col-6 q-pa-md">
@@ -81,7 +81,6 @@
 </template>
 
 <script>
-import { QStyle, QTheme } from 'quasar-app-extension-qstyles/src/themer'
 import html from './form-demo.html.md'
 
 export default {
@@ -98,8 +97,6 @@ export default {
       option: 'Yes',
       selected: 'Quasar Framework',
       options: [ 'Quasar Framework', 'Vue JS', 'Cordova', 'Electron', 'Webview', 'SSR + PWA' ],
-      QStyle: QStyle,
-      QTheme: QTheme,
       tab: 'demo',
       html: html
     }

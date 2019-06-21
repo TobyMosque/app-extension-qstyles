@@ -1,6 +1,6 @@
 import QStyleFactory from './QStyleFactory'
-import baseState from './QStyle'
-import btnGroupState from './QBtnGroup'
+import baseState from 'quasar-app-extension-qstyles/src/styles/QStyle'
+import btnGroupState from 'quasar-app-extension-qstyles/src/styles/QBtnGroup'
 import btnCommonState, { Model as BaseModel, mixin as baseMixin } from 'quasar-app-extension-qstyles/src/styles/QBtnShared'
 
 class Model extends BaseModel {

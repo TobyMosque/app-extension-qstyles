@@ -1,5 +1,5 @@
-import QStyleField from 'quasar-app-extension-qstyles/src/components/QField.js'
+import QField from 'quasar-app-extension-qstyles/src/components/QField.js'
 
 export default ({ Vue, ssrContext }) => {
-  Vue.component('q-field', QStyleField(ssrContext))
+  Vue.component('q-field', QField(ssrContext))
 }

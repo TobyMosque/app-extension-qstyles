@@ -9,7 +9,7 @@
       <q-tab name="html" label="Html" />
       <q-tab name="code" label="Code" />
     </q-tabs>
-    <q-tab-panels v-model="tab" animated :class="QStyle.dark ? QTheme.dark : QTheme.light">
+    <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="settings" class="q-pa-none">
         <q-tabs v-model="tabSettings" align="justify" narrow-indicator >
           <q-tab name="field" label="Field Common" />
@@ -17,7 +17,7 @@
           <q-tab name="button" label="Button Common" />
           <q-tab name="buttonAlt" label="Button Others" />
         </q-tabs>
-        <q-tab-panels v-model="tabSettings" animated :class="QStyle.dark ? QTheme.dark : QTheme.light">
+        <q-tab-panels v-model="tabSettings" animated>
           <q-tab-panel name="field">
             <div class="row">
               <div class="col-6 q-pa-md">
@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import { QStyle, QTheme, QBtnShared, QBtn, QBtnGroup, QBtnDropdown, QBtnToggle, QField, QInput, QSelect, QSlider, QDate } from 'quasar-app-extension-qstyles/src/themer'
+import { QStyle, QBtnShared, QBtn, QBtnGroup, QBtnDropdown, QBtnToggle, QField, QInput, QSelect, QSlider, QDate } from 'quasar-app-extension-qstyles/src/themer'
 
 import html from './field-settings.html.md'
 import code from './field-settings.code.md'
@@ -144,7 +144,6 @@ export default {
   name: 'ComponentFieldSettings',
   data () {
     return {
-      QTheme: QTheme,
       QStyle: QStyle,
       QBtnShared: QBtnShared,
       QBtn: QBtn,

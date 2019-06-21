@@ -8,6 +8,8 @@ class Model extends BaseModel {
   borderless = void 0
   standout = void 0
   standoutClass = void 0
+  standoutDarkClass = void 0
+  standoutLightClass = void 0
   hideBottomSpace = void 0
   rounded = void 0
   square = void 0
@@ -47,6 +49,17 @@ let { state, mixin } = QStyleFactory({ Model, BaseModel, baseMixin, baseStates: 
         }
       }
       return standout
+    }
+
+    computed.__standoutClass = function () {
+      let superClass = this.__getStyleProp(this.$attrs.standoutClass, 'standoutClass')
+      if (!superClass) {
+        let dark = this.__getStyleProp(this.$attrs.dark, 'dark')
+        let darkClass = this.__getStyleProp(this.$attrs.standoutDarkClass, 'standoutDarkClass')
+        let lightClass = this.__getStyleProp(this.$attrs.standoutLightClass, 'standoutLightClass')
+        superClass = dark ? darkClass : lightClass
+      }
+      return superClass
     }
   }
 })

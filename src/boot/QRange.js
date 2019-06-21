@@ -1,5 +1,5 @@
-import QStyleRange from 'quasar-app-extension-qstyles/src/components/QRange.js'
+import QRange from 'quasar-app-extension-qstyles/src/components/QRange.js'
 
 export default ({ Vue, ssrContext }) => {
-  Vue.component('q-range', QStyleRange(ssrContext))
+  Vue.component('q-range', QRange(ssrContext))
 }

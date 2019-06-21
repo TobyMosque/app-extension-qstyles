@@ -1,9 +1,8 @@
 import Vue from 'vue'
 
-export default function ({ Model, BaseModel, baseMixin, baseStates, methods, cbComputed }) {
+export default function ({ Model, BaseModel, baseMixin, baseMixins, baseStates, methods, cbComputed }) {
   let instance = new Model()
   let state = Vue.observable(instance)
-
   let computed = {}
   let properties = Object.keys(instance)
   if (BaseModel) {
@@ -50,12 +49,14 @@ export default function ({ Model, BaseModel, baseMixin, baseStates, methods, cbC
   if (cbComputed) {
     cbComputed(computed)
   }
+  
+  if (baseMixin) {
+    baseMixins = [ baseMixin ]
+  }
 
   let mixin = {}
   mixin.computed = computed
-  if (baseMixin) {
-    mixin.mixins =[ baseMixin ]
-  }
+  mixin.mixins = baseMixins
   mixin.methods = methods || {}
   mixin.methods.__getClassProp = function ($class) {
     if (!$class)

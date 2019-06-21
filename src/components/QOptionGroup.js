@@ -3,5 +3,9 @@ import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QOptionGro
 import { QOptionGroup } from 'quasar'
 
 export default function (ssrContext) {
-  return ComponentFactory({ ssrContext, name: 'QOptionGroup', component: QOptionGroup, state, mixin, valueProp: { required: true } })
+  return ComponentFactory({ ssrContext, name: 'QOptionGroup', component: QOptionGroup, state, mixin,
+    props: { 
+      value: { required: true }
+    }
+  })
 }

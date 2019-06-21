@@ -6,7 +6,7 @@
     <q-tab name="button" label="Button Common" />
     <q-tab name="buttonAlt" label="Button Others" />
   </q-tabs>
-  <q-tab-panels v-model="tabSettings" animated :class="QStyle.dark ? QTheme.dark : QTheme.light">
+  <q-tab-panels v-model="tabSettings" animated>
     <q-tab-panel name="field">
       <div class="row">
         <div class="col-6 q-pa-md">

@@ -20,11 +20,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      bordered
-      content-class="bg-grey-2"
-    >
+    <q-drawer v-model="leftDrawerOpen">
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
         <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
@@ -75,7 +71,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container :class="QStyle.dark ? 'bg-grey-10' : 'bg-white'">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -83,11 +79,13 @@
 
 <script>
 import { openURL } from 'quasar'
+import { QStyle } from 'quasar-app-extension-qstyles/src/themer'
 
 export default {
   name: 'MyLayout',
   data () {
     return {
+      QStyle: QStyle,
       leftDrawerOpen: this.$q.platform.is.desktop
     }
   },

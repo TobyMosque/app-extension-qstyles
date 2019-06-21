@@ -1,5 +1,5 @@
-import QStyleToggle from 'quasar-app-extension-qstyles/src/components/QToggle.js'
+import QToggle from 'quasar-app-extension-qstyles/src/components/QToggle.js'
 
 export default ({ Vue, ssrContext }) => {
-  Vue.component('q-toggle', QStyleToggle(ssrContext))
+  Vue.component('q-toggle', QToggle(ssrContext))
 }

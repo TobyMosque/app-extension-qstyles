@@ -1,13 +1,13 @@
 import Vue from 'vue'
 
-export default function ({ ssrContext, name, component, state, mixin, valueProp }) {
+export default function ({ ssrContext, name, component, state, mixin, props }) {
   let wrapper = {
     name: name,
     mixins: [ mixin ]
   }
 
-  if (valueProp) {
-    wrapper.props = { value: valueProp }
+  wrapper.props = props || {}
+  if (wrapper.props.value) {
     wrapper.computed = {
       __value: {
         get () { return this.value },
@@ -23,15 +23,15 @@ export default function ({ ssrContext, name, component, state, mixin, valueProp 
     let attrs = self.__getAttrs(self, state, this.$attrs)
     let { ...scopedSlots } = this.$scopedSlots
     let classes = this.__class
-    if (valueProp) {
+    if (wrapper.props.value) {
       let { input, ...listeners } = this.$listeners
-      let { value, ...props } = this.$props || {}
-      props.value = self.__value
+      let { value, ...qProps } = this.$props || {}
+      qProps.value = self.__value
       listeners.input = (value) => {
         self.__value = value
       }
       return h(component, {
-        props: props,
+        props: qProps,
         attrs: attrs,
         class: classes,
         on: listeners,
@@ -39,9 +39,9 @@ export default function ({ ssrContext, name, component, state, mixin, valueProp 
       })
     } else {
       let { ...listeners } = this.$listeners
-      let { ...props } = this.$props || {}
+      let { ...qProps } = this.$props || {}
       return h(component, {
-        props: props,
+        props: qProps,
         attrs: attrs,
         class: classes,
         on: listeners,
