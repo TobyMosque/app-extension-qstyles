@@ -71,7 +71,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container :class="QStyle.dark ? 'bg-grey-10' : 'bg-white'">
+    <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>

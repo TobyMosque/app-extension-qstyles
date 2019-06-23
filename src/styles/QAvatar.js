@@ -3,7 +3,7 @@ import baseState, { Model as BaseModel, mixin as baseMixin } from 'quasar-app-ex
 
 class Model extends BaseModel {
   size = void 0
-  textSize = void 0
+  fontSize = void 0
   square = void 0
   rounded = void 0
 }

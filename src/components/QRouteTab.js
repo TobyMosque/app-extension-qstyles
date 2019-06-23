@@ -1,5 +1,5 @@
 import ComponentFactory from './QComponentFactory'
-import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QTab'
+import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QRouteTab'
 import { QRouteTab } from 'quasar'
 
 export default function (ssrContext) {

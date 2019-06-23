@@ -4,8 +4,8 @@ import baseState, { Model as BaseModel, mixin as baseMixin } from 'quasar-app-ex
 class Model extends BaseModel {
   inputStyle = void 0
   inputClass = void 0
-  inputDarkStyle = void 0
-  inputLightStyle = void 0
+  inputDarkClass = void 0
+  inputLightClass = void 0
   size = void 0
 }
 let { state, mixin } = QStyleFactory({ Model, BaseModel, baseMixin, baseStates: [ baseState ],
@@ -14,8 +14,8 @@ let { state, mixin } = QStyleFactory({ Model, BaseModel, baseMixin, baseStates: 
       let superClass = this.__getStyleProp(this.$attrs.inputClass, 'inputClass')
       if (!superClass) {
         let dark = this.__getStyleProp(this.$attrs.dark, 'dark')
-        let darkClass = this.__getStyleProp(this.$attrs.inputDarkStyle, 'inputDarkStyle')
-        let lightClass = this.__getStyleProp(this.$attrs.inputLightStyle, 'inputLightStyle')
+        let darkClass = this.__getStyleProp(this.$attrs.inputDarkClass, 'inputDarkClass')
+        let lightClass = this.__getStyleProp(this.$attrs.inputLightClass, 'inputLightClass')
         superClass = dark ? darkClass : lightClass
       }
       return superClass
