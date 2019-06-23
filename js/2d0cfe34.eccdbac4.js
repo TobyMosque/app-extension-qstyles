@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["2d0cfe34"],{6642:function(e){e.exports={type:"component",props:{props:{type:"Object",desc:"QTable's row scoped slot property",examples:[':props="props"'],category:"general"}},slots:{default:{desc:"Default slot in the devland unslotted content of the component"}}}}}]);

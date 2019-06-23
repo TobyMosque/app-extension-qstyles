@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["2d22292c"],{ced8:function(e){e.exports={type:"plugin",injection:"$q.appVisible",props:{appVisible:{tsInjectionPoint:!0,type:"Boolean",desc:"Does the app have user focus? Or the app runs in the background / another tab has the user's attention",reactive:!0}}}}}]);
