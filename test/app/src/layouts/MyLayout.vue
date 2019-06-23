@@ -23,6 +23,20 @@
     <q-drawer v-model="leftDrawerOpen">
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
+        <q-expansion-item expand-separator label="Layout">
+          <q-item v-for="layout in layouts" :key="layout.name" clickable :to="layout.path">
+            <q-item-section>
+              <q-item-label>{{layout.name}}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+        <q-expansion-item expand-separator label="Components">
+          <q-item v-for="component in components" :key="component.name" clickable :to="component.path">
+            <q-item-section>
+              <q-item-label>{{component.name}}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
         <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
           <q-item-section avatar>
             <q-icon name="school" />
@@ -78,15 +92,32 @@
 </template>
 
 <script>
+import metaService from '../services/metas'
 import { openURL } from 'quasar'
 import { QStyle } from 'quasar-app-extension-qstyles/src/themer'
 
 export default {
   name: 'MyLayout',
   data () {
+    let layouts = metaService.layouts.map(layout => {
+      let dash = layout.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).substring(1)
+      return {
+        name: layout,
+        path: '/layout/' + dash
+      }
+    })
+    let components = metaService.components.map(layout => {
+      let dash = layout.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).substring(1)
+      return {
+        name: layout,
+        path: '/component/' + dash
+      }
+    })
     return {
       QStyle: QStyle,
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      layouts: layouts,
+      components: components
     }
   },
   methods: {

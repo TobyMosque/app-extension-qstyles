@@ -1,7 +1,7 @@
 // import something here
 import { colors } from 'quasar'
 
-import { registerTheme, setTheme, QStyle, QPopup, QPageContainer, QDrawer, QBtnShared, QIcon, QField, QCard, QTabPanels, QSeparator } from 'quasar-app-extension-qstyles/src/themer'
+import { registerTheme, setTheme, QStyle, QPopup, QPageContainer, QDrawer, QBtnShared, QIcon, QField, QCard, QList, QTabPanels, QSeparator } from 'quasar-app-extension-qstyles/src/themer'
 
 // "async" is optional
 export default async ({ ssrContext }) => {
@@ -21,6 +21,8 @@ export default async ({ ssrContext }) => {
     QCard.bordered = true
     QCard.darkClass = 'bg-grey-9 text-white'
     QCard.lightClass = 'bg-grey-2 text-black'
+    QList.darkClass = 'bg-grey-9 text-white'
+    QList.lightClass = 'bg-grey-2 text-black'
     QTabPanels.darkClass = 'bg-grey-9 text-white'
     QTabPanels.lightClass = 'bg-grey-2 text-black'
     QDrawer.contentDarkClass = 'bg-grey-9 text-white'
