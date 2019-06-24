@@ -1,10 +1,12 @@
 // import something here
 import metaService from '../services/metas'
 import componentService from '../services/components'
+import QSelectColor from '../components/QSelectColor'
 
 // "async" is optional
 export default async ({ Vue, router }) => {
   await metaService.initialize()
+  Vue.component('q-select-color', QSelectColor)
   metaService.metaKeys.forEach(metaKey => {
     let dash = metaKey.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).substring(1)
     let meta = metaService.metas[metaKey]

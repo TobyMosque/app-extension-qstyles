@@ -34,6 +34,19 @@ class ComponentService {
             }, void 0)
           }
 
+          let selectColorInput = () => {
+            return h('q-select-color', {
+              props: {
+                value: meta.state[propName]
+              },
+              on: {
+                input (value) {
+                  meta.state[propName] = value
+                }
+              }
+            }, void 0)
+          }
+
           let textInput = () => {
             return h('q-input', {
               props: {
@@ -81,17 +94,23 @@ class ComponentService {
             }
           }
 
-          if (typeof prop.type === 'string') {
-            let name = prop.type.toLowerCase()
-            checkType(type => name === type)
+          let typeName = ''
+          if (prop.name.indexOf('color') !== -1) {
+            typeName = prop.type.toLowerCase()
+            editField = selectColorInput()
+          } else if (typeof prop.type === 'string') {
+            typeName = prop.type.toLowerCase()
+            checkType(type => typeName === type)
           } else if (Array.isArray(prop.type)) {
             let types = prop.type.map(type => type.toLowerCase())
+            typeName = types.join(', ')
             checkType(type => types.indexOf(type) !== -1)
           }
 
           let row = h('tr', {}, [
             h('td', {}, prop.name),
             h('td', {}, propName),
+            h('td', {}, typeName),
             h('td', { style: 'min-width: 250px' }, [ editField ]),
             h('td', { style: 'white-space: inherit' }, prop.desc)
           ])
@@ -102,6 +121,7 @@ class ComponentService {
           h('tr', {}, [
             h('th', {}, 'Dash Case'),
             h('th', {}, 'Camel Case'),
+            h('th', {}, 'Type(s)'),
             h('th', { style: 'min-width: 250px' }, 'Value'),
             h('th', { style: 'white-space: inherit' }, 'Description')
           ])

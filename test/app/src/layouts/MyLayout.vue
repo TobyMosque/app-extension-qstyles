@@ -23,6 +23,16 @@
     <q-drawer v-model="leftDrawerOpen">
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
+        <q-item clickable to="/export">
+          <q-item-section>
+            <q-item-label>Export Theme</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable to="/colors">
+          <q-item-section>
+            <q-item-label>Brand Colors</q-item-label>
+          </q-item-section>
+        </q-item>
         <q-expansion-item expand-separator label="Layout">
           <q-item v-for="layout in layouts" :key="layout.name" clickable :to="layout.path">
             <q-item-section>

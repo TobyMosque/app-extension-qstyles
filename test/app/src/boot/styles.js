@@ -1,14 +1,13 @@
-// import something here
-import { colors } from 'quasar'
-
 import { registerTheme, setTheme, QStyle, QPopup, QPageContainer, QDrawer, QBtnShared, QIcon, QField, QCard, QList, QTabPanels, QSeparator } from 'quasar-app-extension-qstyles/src/themer'
+import colorService from '../services/colors'
 
 // "async" is optional
-export default async ({ ssrContext }) => {
+export default async ({ Vue, ssrContext }) => {
+  await colorService.initialize(Vue)
   registerTheme('dark-outlined', () => {
     if (!ssrContext) {
-      colors.setBrand('primary', '#009688')
-      colors.setBrand('secondary', '#673ab7')
+      colorService.setBrand('primary', '#009688')
+      colorService.setBrand('secondary', '#673ab7')
     }
     QPopup.contentDarkClass = 'bg-grey-9 text-white'
     QPopup.contentLightClass = 'bg-grey-2 text-black'
