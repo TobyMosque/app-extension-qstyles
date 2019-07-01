@@ -48,6 +48,9 @@ export default function ({ ssrContext, name, component, state, mixin }) {
     for (let key in component.options.methods) {
       let methodName = key
       wrapper.methods[methodName] = function () {
+        if (['QMenu', 'QPopupProxy', 'QTooltip'].indexOf(name) !== -1) {
+          console.log(name, methodName, arguments)
+        }
         this.$refs.root[methodName].apply(this.$refs.root, arguments)
       }
     }

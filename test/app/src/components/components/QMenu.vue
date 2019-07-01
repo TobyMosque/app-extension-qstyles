@@ -2,8 +2,8 @@
   <div class="q-pa-md">
     <div class="q-gutter-md">
 
-      <q-btn color="primary" label="Basic Menu" @click="show($refs.menu1)">
-        <q-menu ref="menu1">
+      <q-btn color="primary" label="Basic Menu">
+        <q-menu>
           <q-list style="min-width: 100px">
             <q-item clickable v-close-popup>
               <q-item-section>New tab</q-item-section>
@@ -33,8 +33,8 @@
         </q-menu>
       </q-btn>
 
-      <q-btn color="secondary" label="Auto-Close Menu" @click="show($refs.menu2)">
-        <q-menu auto-close ref="menu2">
+      <q-btn color="secondary" label="Auto-Close Menu">
+        <q-menu auto-close>
           <q-list style="min-width: 100px">
             <q-item clickable>
               <q-item-section>New tab</q-item-section>

@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
-    <q-btn push color="primary" label="Handles click" @click="show($refs.popup)">
-      <q-popup-proxy ref="popup">
+    <q-btn push color="primary" label="Handles click">
+      <q-popup-proxy>
         <q-banner>
           <template v-slot:avatar>
             <q-icon name="signal_wifi_off" color="primary" />
