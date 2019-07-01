@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["2d2132ea"],{ac1c:function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div")},c=[],l={name:"QColorDemo"},o=l,r=t("2877"),u=Object(r["a"])(o,a,c,!1,null,null,null);n["default"]=u.exports}}]);

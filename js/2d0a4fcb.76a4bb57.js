@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["2d0a4fcb"],{"097c":function(e,n,t){"use strict";t.r(n);var c=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div")},u=[],a={name:"QMenuDemo"},l=a,o=t("2877"),r=Object(o["a"])(l,c,u,!1,null,null,null);n["default"]=r.exports}}]);

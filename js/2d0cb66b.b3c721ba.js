@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["2d0cb66b"],{"4a08":function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div")},c=[],l={name:"QVideoDemo"},o=l,u=t("2877"),i=Object(u["a"])(o,a,c,!1,null,null,null);n["default"]=i.exports}}]);

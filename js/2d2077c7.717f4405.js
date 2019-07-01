@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["2d2077c7"],{a178:function(e,n,a){"use strict";a.r(n);var l=function(){var e=this,n=e.$createElement,a=e._self._c||n;return a("div")},t=[],c={name:"QParallaxDemo"},r=c,u=a("2877"),o=Object(u["a"])(r,l,t,!1,null,null,null);n["default"]=o.exports}}]);
