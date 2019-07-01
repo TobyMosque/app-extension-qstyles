@@ -28,7 +28,7 @@ class MetaService {
     'QDrawer': { name: 'QDrawer', parent: 'QLayout', children: [], others: [], depedents: [] },
     'QEditor': { name: 'QEditor', parent: 'QStyle', children: [], others: [], depedents: [] },
     'QExpansionItem': { name: 'QExpansionItem', parent: 'QStyle', children: [], others: [], depedents: [] },
-    'QFab': { name: 'QFab', parent: 'QBtnGroup', children: [], others: [], depedents: [] },
+    'QFab': { name: 'QFab', parent: 'QBtnGroup', children: [], others: [], depedents: ['QFabAction'] },
     'QFabAction': { name: 'QFabAction', parent: 'QBtnGroup', children: [], others: [], depedents: [] },
     'QField': { name: 'QField', parent: 'QStyle', children: [], others: [], depedents: [] },
     'QForm': { name: 'QForm', parent: 'QStyle', children: [], others: [], depedents: [] },
@@ -111,8 +111,7 @@ class MetaService {
   }
   layouts = [
     'QLayout',
-    'QFab',
-    'QFabAction'
+    'QFab'
   ]
   components = [
     'QAjaxBar',

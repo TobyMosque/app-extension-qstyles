@@ -2,8 +2,8 @@
   <div class="q-pa-md">
     <div class="q-gutter-md">
 
-      <q-btn color="primary" label="Basic Menu">
-        <q-menu>
+      <q-btn color="primary" label="Basic Menu" @click="menu1 = true">
+        <q-menu v-model="menu1">
           <q-list style="min-width: 100px">
             <q-item clickable v-close-popup>
               <q-item-section>New tab</q-item-section>
@@ -33,8 +33,8 @@
         </q-menu>
       </q-btn>
 
-      <q-btn color="secondary" label="Auto-Close Menu">
-        <q-menu auto-close>
+      <q-btn color="secondary" label="Auto-Close Menu" @click="menu2 = true">
+        <q-menu auto-close v-model="menu2">
           <q-list style="min-width: 100px">
             <q-item clickable>
               <q-item-section>New tab</q-item-section>
@@ -94,10 +94,10 @@
 <script>
 export default {
   name: 'QMenuDemo',
-  methods: {
-    show (menu) {
-      console.log(menu.show)
-      menu.show()
+  data () {
+    return {
+      menu1: false,
+      menu2: false
     }
   }
 }
