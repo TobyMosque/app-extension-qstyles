@@ -1,4 +1,4 @@
-const extendDatetimePicker = function (conf) {
+const extendStyler = function (conf) {
   let components = [
     'QLayout',
     'QPageContainer',
@@ -16,11 +16,16 @@ const extendDatetimePicker = function (conf) {
     'QBanner',
     'QBar',
     'QBreadcrumbs',
+    'QBreadcrumbsEl',
     'QBtn',
     'QBtnGroup',
     'QBtnDropdown',
     'QCard',
+    'QCardSection',
+    'QCardSection',
     'QCarousel',
+    'QCarouselControl',
+    'QCarouselSlide',
     'QChatMessage',
     'QCheckbox',
     'QChip',
@@ -32,14 +37,17 @@ const extendDatetimePicker = function (conf) {
     'QExpansionItem',
     'QInput',
     'QField',
+    'QForm',
     'QIcon',
     'QImg',
+    'QInfiniteScroll',
     'QInnerLoading',
-    'QInput',
     'QKnob',
     'QLinearProgress',
     'QList',
     'QItem',
+    'QItemSection',
+    'QItemLabel',
     'QMarkupTable',
     'QMenu',
     'QSelect',
@@ -62,8 +70,12 @@ const extendDatetimePicker = function (conf) {
     'QSpinner',
     'QSplitter',
     'QStepper',
+    'QStepperNavigation',
     'QStep',
     'QTable',
+    'QTh',
+    'QTr',
+    'QTd',
     'QTabs',
     'QTab',
     'QRouteTab',
@@ -80,6 +92,7 @@ const extendDatetimePicker = function (conf) {
     'QDate',
     'QTime'
   ]
+  conf.boot.push('~quasar-app-extension-qstyles/src/boot/QStyler.js')
   components.forEach(component => {
     if (conf.framework.components.indexOf(component)) {
       conf.boot.push('~quasar-app-extension-qstyles/src/boot/' + component + '.js')
@@ -94,6 +107,6 @@ module.exports = function (api) {
     return api.compatibleWithQuasarApp(version)
   }
   compatibleWith('@quasar/app', '^1.0.0-beta.23')
-  api.extendQuasarConf(extendDatetimePicker)
+  api.extendQuasarConf(extendStyler)
 }
 

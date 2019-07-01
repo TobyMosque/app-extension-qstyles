@@ -1,12 +1,37 @@
 import Vue from 'vue'
 
-export default function ({ ssrContext, name, component, state, mixin, props }) {
+export default function ({ ssrContext, name, component, state, mixin }) {
   let wrapper = {
     name: name,
     mixins: [ mixin ]
   }
 
-  wrapper.props = props || {}
+  wrapper.props = {}
+  if (component.options.props) {
+    let propKeys = Object.keys(component.options.props)
+    let stateKeys = Object.keys(state)
+    let props = propKeys.filter(key => stateKeys.indexOf(key) === -1)
+    
+    for (let index in props) {
+      let name = props[index]
+      let original = component.options.props[name]
+      let isObject = original != null && original.constructor.name === 'Object'
+      let prop
+      if (isObject) {
+        if (name === 'value') {
+          let { ...values } = original
+          prop = values
+        } else {
+          let { default: _default, validator, ...values } = original
+          prop = values
+        }
+      } else {
+        prop = original
+      }
+      wrapper.props[name] = prop
+    }
+  }
+  
   if (wrapper.props.value) {
     wrapper.computed = {
       __value: {
@@ -19,15 +44,12 @@ export default function ({ ssrContext, name, component, state, mixin, props }) {
   }
 
   if (component.options.methods) {
-    let keys = Object.keys(component.options.methods)
-    keys = keys.filter(key => !key.startsWith('__'))
-    if (keys.length) {
-      wrapper.methods = {}
-      keys.forEach(methodName => {
-        wrapper.methods[methodName] = function () {
-          this.$refs.root[methodName].apply(this.$refs.root, arguments)
-        }
-      });
+    wrapper.methods = {}
+    for (let key in component.options.methods) {
+      let methodName = key
+      wrapper.methods[methodName] = function () {
+        this.$refs.root[methodName].apply(this.$refs.root, arguments)
+      }
     }
   }
 

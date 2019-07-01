@@ -14,6 +14,13 @@ class Model extends BaseModel {
   contentClass = void 0
   contentLightClass = void 0
   contentDarkClass = void 0
+  toolbarColor = void 0
+  toolbarTextColor = void 0
+  toolbarToggleColor = void 0
+  toolbarBg = void 0
+  toolbarOutline = void 0
+  toolbarPush = void 0
+  toolbarRounded = void 0
 }
 let { state, mixin } = QStyleFactory({ Model, BaseModel, baseMixin, baseStates: [ baseState ], 
   cbComputed (computed) {

@@ -1,6 +1,7 @@
 import { colors } from 'quasar'
 
 class ColorService {
+  isServer = false
   brands = {
     primary: '',
     secondary: '',
@@ -11,8 +12,12 @@ class ColorService {
     warning: ''
   }
   colors = {}
-  options = void 0
-  async initialize (Vue) {
+  options = []
+  async initialize (Vue, ssrContext) {
+    this.isServer = !!ssrContext
+    if (this.isServer) {
+      return
+    }
     let self = this
     let colorNames = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey' ]
     let promises = []
@@ -54,6 +59,9 @@ class ColorService {
     this.options = Vue.observable(options)
   }
   createImage (color) {
+    if (this.isServer) {
+      return Promise.resolve('#')
+    }
     return new Promise((resolve, reject) => {
       var canvas = document.createElement('canvas')
       canvas.width = 64
@@ -67,19 +75,22 @@ class ColorService {
     })
   }
   async getComputed ({ dom, computed, dbComputed }) {
-    let hasDom = dom !== void 0
-    if (!hasDom) {
-      dom = document.createElement('div')
-      document.body.appendChild(dom)
+    if (!this.isServer) {
+      let hasDom = dom !== void 0
+      if (!hasDom) {
+        dom = document.createElement('div')
+        document.body.appendChild(dom)
+      }
+      if (!computed) {
+        computed = window.getComputedStyle(dom)
+      }
+      let response = await dbComputed({ dom, computed })
+      if (!hasDom) {
+        document.body.removeChild(dom)
+      }
+      return response
     }
-    if (!computed) {
-      computed = window.getComputedStyle(dom)
-    }
-    let response = await dbComputed({ dom, computed })
-    if (!hasDom) {
-      document.body.removeChild(dom)
-    }
-    return response
+    return void 0
   }
   async getColor ({ colorName, dom, computed }) {
     let response = await this.getComputed({
@@ -99,7 +110,7 @@ class ColorService {
     return response
   }
   async setBrand (brandName, color) {
-    if (this.brands[brandName].color !== color) {
+    if (!this.isServer && this.brands[brandName].color !== color) {
       colors.setBrand(brandName, color)
       this.brands[brandName].color = color
 
@@ -111,7 +122,10 @@ class ColorService {
     }
   }
   getBrand (brandName) {
-    return colors.getBrand(brandName)
+    if (!this.isServer) {
+      return colors.getBrand(brandName)
+    }
+    return void 0
   }
 }
 

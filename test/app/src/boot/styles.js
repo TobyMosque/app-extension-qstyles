@@ -1,14 +1,13 @@
-import { registerTheme, setTheme, QStyle, QPopup, QPageContainer, QDrawer, QBtnShared, QIcon, QField, QCard, QList, QTabPanels, QSeparator } from 'quasar-app-extension-qstyles/src/themer'
+import themer, { QStyle, QPopup, QPageContainer, QDrawer, QBtnShared, QIcon, QField, QCard, QList, QTabPanels, QSeparator } from 'quasar-app-extension-qstyles/src/themer'
 import colorService from '../services/colors'
-
 // "async" is optional
 export default async ({ Vue, ssrContext }) => {
-  await colorService.initialize(Vue)
-  registerTheme('dark-outlined', () => {
-    if (!ssrContext) {
-      colorService.setBrand('primary', '#009688')
-      colorService.setBrand('secondary', '#673ab7')
-    }
+  await colorService.initialize(Vue, ssrContext)
+  themer.initialize(ssrContext)
+  themer.registerTheme('dark-outlined', () => {
+    colorService.setBrand('primary', '#009688')
+    colorService.setBrand('secondary', '#673ab7')
+    themer.importStyle(() => Promise.resolve())
     QPopup.contentDarkClass = 'bg-grey-9 text-white'
     QPopup.contentLightClass = 'bg-grey-2 text-black'
     QBtnShared.color = 'secondary'
@@ -31,5 +30,5 @@ export default async ({ Vue, ssrContext }) => {
     QPageContainer.lightClass = 'bg-grey-1'
     QSeparator.color = null
   })
-  setTheme('dark-outlined')
+  themer.setTheme('dark-outlined')
 }

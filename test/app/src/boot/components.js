@@ -2,6 +2,8 @@
 import metaService from '../services/metas'
 import componentService from '../services/components'
 import QSelectColor from '../components/QSelectColor'
+import QDatePage from '../pages/QDate'
+import QCardPage from '../pages/QCard'
 
 // "async" is optional
 export default async ({ Vue, router }) => {
@@ -45,8 +47,15 @@ export default async ({ Vue, router }) => {
   let components = metaService.components.map(metaKey => {
     let dash = metaKey.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).substring(1)
     let meta = metaService.metas[metaKey]
-    let component = componentService.buildPage(Vue, dash, meta)
-    Vue.component(dash + '-demo', () => import('../components/components/' + metaKey))
+    let component = null
+    if (metaKey === 'QDate') {
+      component = QDatePage
+    } else if (metaKey === 'QCard') {
+      component = QCardPage
+    } else {
+      component = componentService.buildPage(Vue, dash, meta)
+      Vue.component(dash + '-demo', () => import('../components/components/' + metaKey))
+    }
     return { path: dash, component: component }
   })
 

@@ -32,34 +32,19 @@ export default {
       })
     }
   },
-  /*
-  <q-select use-input hide-selected fill-input @filter="filterFn" :options="__options" v-model="model">
-          <template v-slot:option="scope">
-            <q-item v-bind="scope.itemProps" v-on="scope.itemEvents" >
-              <q-item-section avatar>
-                <q-avatar>
-                  <img :src="scope.opt.image">
-                </q-avatar>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label v-html="scope.opt.label" />
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-select>
-  */
   render (h) {
     let self = this
     let { value, ...props } = this.$props || {}
-    let { useInput, options, ...attrs } = this.$attrs || {}
+    let { useInput, clearable, options, ...attrs } = this.$attrs || {}
     let { input, filter, ...listeners } = this.$listeners || {}
     let { ...scopedSlots } = this.$scopedSlots || {}
 
     attrs.useInput = true
+    attrs.clearable = true
     attrs.options = self.__options
     props.value = self.__value
     listeners.input = (option) => {
-      self.__value = option.value
+      self.__value = option ? option.value : void 0
     }
 
     listeners.filter = (val, update) => {

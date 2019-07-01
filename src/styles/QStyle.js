@@ -14,16 +14,23 @@ let { state, mixin } = QStyleFactory({ Model,
   methods: {
     __getAttrs (self, state, attrs) {
       let classes = [ 'darkClass', 'lightClass' ]
-      let stateKeys = Object.keys(state).filter(key => classes.indexOf(key) === -1)
       let attrsKeys = Object.keys(attrs)
+      let stateKeys = Object.keys(state)
+        .filter(key => classes.indexOf(key) === -1)
+        .reduce((names, camel) => {
+          let dash = camel.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
+          names[dash] = camel
+          return names 
+        }, {})
       
       let __attrs = {}
-      stateKeys.forEach(key => {
-        __attrs[key] = self['__' + key]
-      })
-      attrsKeys.forEach(key => {
-        if (stateKeys.indexOf(key) === -1) {
-          __attrs[key] = attrs[key]
+      for (var dash in stateKeys) {
+        let camel = stateKeys[dash]
+        __attrs[dash] = self['__' + camel]
+      }
+      attrsKeys.forEach(dash => {
+        if (stateKeys[dash]) {
+          __attrs[dash] = attrs[dash]
         }
       })
       return __attrs

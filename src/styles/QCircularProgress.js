@@ -8,11 +8,6 @@ class Model extends BaseModel {
   fontSize = void 0
   thickness = void 0
 }
-let { state, mixin } = QStyleFactory({ Model, BaseModel, baseMixin, baseStates: [ baseState ], 
-  valueProp: {
-    type: Number,
-    default: 0
-  }
-})
+let { state, mixin } = QStyleFactory({ Model, BaseModel, baseMixin, baseStates: [ baseState ] })
 export default state
 export { Model, mixin }

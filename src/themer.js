@@ -5,13 +5,18 @@ import QBadge from 'quasar-app-extension-qstyles/src/styles/QBadge'
 import QBanner from 'quasar-app-extension-qstyles/src/styles/QBanner'
 import QBar from 'quasar-app-extension-qstyles/src/styles/QBar'
 import QBreadcrumbs from 'quasar-app-extension-qstyles/src/styles/QBreadcrumbs'
+import QBreadcrumbsEl from 'quasar-app-extension-qstyles/src/styles/QBreadcrumbsEl'
 import QBtnGroup from 'quasar-app-extension-qstyles/src/styles/QBtnGroup'
 import QBtnShared from 'quasar-app-extension-qstyles/src/styles/QBtnShared'
 import QBtnToggle from 'quasar-app-extension-qstyles/src/styles/QBtnToggle'
 import QBtn from 'quasar-app-extension-qstyles/src/styles/QBtn'
 import QBtnDropdown from 'quasar-app-extension-qstyles/src/styles/QBtnDropdown'
 import QCard from 'quasar-app-extension-qstyles/src/styles/QCard'
+import QCardActions from 'quasar-app-extension-qstyles/src/styles/QCardActions'
+import QCardSection from 'quasar-app-extension-qstyles/src/styles/QCardSection' 
 import QCarousel from 'quasar-app-extension-qstyles/src/styles/QCarousel'
+import QCarouselControl from 'quasar-app-extension-qstyles/src/styles/QCarouselControl'
+import QCarouselSlide from 'quasar-app-extension-qstyles/src/styles/QCarouselSlide'
 import QChatMessage from 'quasar-app-extension-qstyles/src/styles/QChatMessage'
 import QCheckbox from 'quasar-app-extension-qstyles/src/styles/QCheckbox'
 import QChip from 'quasar-app-extension-qstyles/src/styles/QChip'
@@ -23,14 +28,18 @@ import QDialog from 'quasar-app-extension-qstyles/src/styles/QDialog'
 import QEditor from 'quasar-app-extension-qstyles/src/styles/QEditor'
 import QExpansionItem from 'quasar-app-extension-qstyles/src/styles/QExpansionItem'
 import QField from 'quasar-app-extension-qstyles/src/styles/QField'
+import QForm from 'quasar-app-extension-qstyles/src/styles/QForm'
 import QIcon from 'quasar-app-extension-qstyles/src/styles/QIcon'
 import QImg from 'quasar-app-extension-qstyles/src/styles/QImg'
 import QInnerLoading from 'quasar-app-extension-qstyles/src/styles/QInnerLoading'
+import QInfiniteScroll from 'quasar-app-extension-qstyles/src/styles/QInfiniteScroll'
 import QInput from 'quasar-app-extension-qstyles/src/styles/QInput'
 import QKnob from 'quasar-app-extension-qstyles/src/styles/QKnob'
 import QLinearProgress from 'quasar-app-extension-qstyles/src/styles/QLinearProgress'
 import QList from 'quasar-app-extension-qstyles/src/styles/QList'
 import QItem from 'quasar-app-extension-qstyles/src/styles/QItem'
+import QItemSection from 'quasar-app-extension-qstyles/src/styles/QItemSection'
+import QItemLabel from 'quasar-app-extension-qstyles/src/styles/QItemLabel'
 import QMarkupTable from 'quasar-app-extension-qstyles/src/styles/QMarkupTable'
 import QMenu from 'quasar-app-extension-qstyles/src/styles/QMenu'
 import QOptionGroup from 'quasar-app-extension-qstyles/src/styles/QOptionGroup'
@@ -55,8 +64,12 @@ import QSlideItem from 'quasar-app-extension-qstyles/src/styles/QSlideItem'
 import QSpinner from 'quasar-app-extension-qstyles/src/styles/QSpinner'
 import QSplitter from 'quasar-app-extension-qstyles/src/styles/QSplitter'
 import QStepper from 'quasar-app-extension-qstyles/src/styles/QStepper'
+import QStepperNavigation from 'quasar-app-extension-qstyles/src/styles/QStepperNavigation'
 import QStep from 'quasar-app-extension-qstyles/src/styles/QStep'
 import QTable from 'quasar-app-extension-qstyles/src/styles/QTable'
+import QTh from 'quasar-app-extension-qstyles/src/styles/QTh'
+import QTr from 'quasar-app-extension-qstyles/src/styles/QTr'
+import QTd from 'quasar-app-extension-qstyles/src/styles/QTd'
 import QTabs from 'quasar-app-extension-qstyles/src/styles/QTabs'
 import QTab from 'quasar-app-extension-qstyles/src/styles/QTab'
 import QTabPanels from 'quasar-app-extension-qstyles/src/styles/QTabPanels'
@@ -100,13 +113,18 @@ const states = [
   QBanner,
   QBar,
   QBreadcrumbs,
+  QBreadcrumbsEl,
   QBtnGroup,
   QBtnShared,
   QBtnToggle,
   QBtn,
   QBtnDropdown,
   QCard,
+  QCardActions,
+  QCardSection,
   QCarousel,
+  QCarouselControl,
+  QCarouselSlide,
   QChatMessage,
   QCheckbox,
   QChip,
@@ -118,14 +136,18 @@ const states = [
   QEditor,
   QExpansionItem,
   QField,
+  QForm,
   QIcon,
   QImg,
+  QInfiniteScroll,
   QInnerLoading,
   QInput,
   QKnob,
   QLinearProgress,
   QList,
   QItem,
+  QItemSection,
+  QItemLabel,
   QMarkupTable,
   QMenu,
   QOptionGroup,
@@ -149,8 +171,12 @@ const states = [
   QSpinner,
   QSplitter,
   QStepper,
+  QStepperNavigation,
   QStep,
   QTable,
+  QTh,
+  QTr,
+  QTd,
   QTabs,
   QTab,
   QTabPanels,
@@ -165,29 +191,69 @@ const states = [
   QVideo
 ]
 
-const reset = function () {
-  states.forEach(state => {
-    Object.keys(state).forEach(key => {
-      state[key] = void 0
+class Themer {
+  resolve = void 0
+  ready = void 0
+  themes = {}
+  styles = []
+  isServer = false
+  constructor () {
+    this.ready = new Promise(resolve => {
+      this.resolve = resolve
     })
-  })
-}
-
-const setTheme = function (name) {
-  reset()
-  if (themes[name]) {
-    themes[name]()
+  }
+  initialize (ssrContext) {
+    this.isServer = !!ssrContext
+    this.resolve()
+  }
+  reset () {
+    for (let index in states) {
+      let state = states[index]
+      for (let key in state) {
+        state[key] = void 0
+      }
+    }
+    if (!this.isServer) {
+      for (let index in this.styles) {
+        document.head.removeChild(styles[index])
+      }
+    }
+    this.styles.length = 0
+  }
+  setTheme  (name) {
+    reset()
+    if (this.themes[name]) {
+      this.themes[name]()
+    }
+  }
+  importStyle (cbImport) {
+    if (!this.isServer) {
+      let tag = process.env.DEV ? 'style' : 'link'
+      let stylesBefore = Array.from(document.head.querySelectorAll(tag))
+      cbImport().then(() => {
+        let stylesAfter = Array.from(document.head.querySelectorAll(tag))
+        for (let index in stylesAfter) {
+          let style = stylesAfter[index]
+          if (stylesBefore.indexOf(style) === -1 && styles.indexOf(style) === -1) {
+            this.styles.push(style)
+          }
+        }
+      })
+    }
+  }
+  setTheme (name) {
+    this.reset()
+    if (this.themes[name]) {
+      this.themes[name]()
+    }
+  }
+  registerTheme (name, callback) {
+    this.themes[name] = callback
   }
 }
 
-const registerTheme = function (name, callback) {
-  themes[name] = callback
-}
-
+export default new Themer()
 export {
-  reset,
-  setTheme,
-  registerTheme,
   QStyle,
   QLayout,
   QPageContainer,
@@ -205,13 +271,18 @@ export {
   QBanner,
   QBar,
   QBreadcrumbs,
+  QBreadcrumbsEl,
   QBtnGroup,
   QBtnShared,
   QBtnToggle,
   QBtn,
   QBtnDropdown,
   QCard,
+  QCardActions,
+  QCardSection,
   QCarousel,
+  QCarouselControl,
+  QCarouselSlide,
   QChatMessage,
   QCheckbox,
   QChip,
@@ -223,14 +294,18 @@ export {
   QEditor,
   QExpansionItem,
   QField,
+  QForm,
   QIcon,
   QImg,
+  QInfiniteScroll,
   QInnerLoading,
   QInput,
   QKnob,
   QLinearProgress,
   QList,
   QItem,
+  QItemSection,
+  QItemLabel,
   QMarkupTable,
   QMenu,
   QOptionGroup,
@@ -254,8 +329,12 @@ export {
   QSpinner,
   QSplitter,
   QStepper,
+  QStepperNavigation,
   QStep,
   QTable,
+  QTh,
+  QTr,
+  QTd,
   QTabs,
   QTab,
   QTabPanels,

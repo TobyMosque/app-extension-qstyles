@@ -29,11 +29,12 @@
 
 <script>
 import colorService from '../services/colors'
-import * as themer from 'quasar-app-extension-qstyles/src/themer'
+import themer, * as _modules from 'quasar-app-extension-qstyles/src/themer'
+console.log(Object.keys(_modules))
 
-let modules = Object.keys(themer).map(moduleName => {
+let modules = Object.keys(_modules).map(moduleName => {
   // eslint-disable-next-line import/namespace
-  return { name: moduleName, module: themer[moduleName] }
+  return { name: moduleName, module: _modules[moduleName] }
 }).filter(item => {
   return item.name.startsWith('Q')
 })
@@ -81,9 +82,9 @@ export default {
 
       if (states && states.length > 0) {
         let imports = states.map(item => item.name).join(', ')
-        markdown += `import { registerTheme, setTheme, ${imports} } from 'quasar-app-extension-qstyles/src/themer'\n`
+        markdown += `import themer, { ${imports} } from 'quasar-app-extension-qstyles/src/themer'\n`
       } else {
-        markdown += `import { registerTheme, setTheme } from 'quasar-app-extension-qstyles/src/themer'\n`
+        markdown += `import themer from 'quasar-app-extension-qstyles/src/themer'\n`
       }
 
       let base64 = void 0
@@ -115,7 +116,8 @@ export default {
 
       markdown += `export default async ({ Vue, ssrContext }) => {\n`
       if (base64) {
-        markdown += `  registerTheme('theme-name', () => {\n`
+        markdown += `  themer.initialize(ssrContext)\n`
+        markdown += `  themer.registerTheme('theme-name', () => {\n`
         if (brands.length > 0) {
           markdown += `    if (!ssrContext) {\n`
           brands.forEach(brand => {
@@ -135,7 +137,7 @@ export default {
           })
         }
         markdown += `  })\n`
-        markdown += `  setTheme('dark-outlined')\n`
+        markdown += `  themer.setTheme('dark-outlined')\n`
       }
       markdown += `}\n`
       return `\`\`\`js\n${markdown}\n\`\`\``
@@ -155,7 +157,7 @@ export default {
       if (options.states && options.states.length > 0) {
         options.states.forEach(([ state, prop, value ]) => {
           // eslint-disable-next-line import/namespace
-          themer[state][prop] = value
+          _modules[state][prop] = value
         })
       }
     }

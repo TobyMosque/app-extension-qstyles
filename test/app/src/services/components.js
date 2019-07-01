@@ -96,7 +96,12 @@ class ComponentService {
 
           let typeName = ''
           if (prop.name.indexOf('color') !== -1) {
-            typeName = prop.type.toLowerCase()
+            if (Array.isArray(prop.type)) {
+              let types = prop.type.map(type => type.toLowerCase())
+              typeName = types.join(', ')
+            } else {
+              typeName = prop.type.toLowerCase()
+            }
             editField = selectColorInput()
           } else if (typeof prop.type === 'string') {
             typeName = prop.type.toLowerCase()
@@ -270,7 +275,7 @@ class ComponentService {
             class: 'text-h6',
             attrs: {
               group: self.accordion,
-              defaultOpened: index === 0,
+              defaultOpened: false, // index === 0,
               label: 'Settings - ' + item.name
             }
           }, [
@@ -326,6 +331,21 @@ class ComponentService {
     return Vue.extend({
       name: meta.name + 'Page',
       render (h) {
+        let sections = [
+          h('q-card-section', {}, [
+            h('div', { class: 'text-h6' }, 'Preview')
+          ]),
+          h('q-separator', {}, void 0),
+          h('q-card-section', {}, [
+            h(name + '-demo', {}, void 0)
+          ])
+        ]
+        if (name === 'q-card') {
+          sections.push(h('q-separator', {}, void 0))
+          sections.push(h('q-card-actions', {}, [
+            h('q-btn', { attrs: { flat: true } }, 'Action')
+          ]))
+        }
         return h('q-page', { class: 'flex q-pa-md' }, [
           h('div', {
             class: 'full-width'
@@ -333,15 +353,7 @@ class ComponentService {
             h(name + '-settings', {}, void 0),
             h('q-card', {
               class: 'q-mb-md'
-            }, [
-              h('q-card-section', {}, [
-                h('div', { class: 'text-h6' }, 'Preview')
-              ]),
-              h('q-separator', {}, void 0),
-              h('q-card-section', {}, [
-                h(name + '-demo', {}, void 0)
-              ])
-            ])
+            }, sections)
           ])
         ])
       }

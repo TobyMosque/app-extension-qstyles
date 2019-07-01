@@ -3,12 +3,5 @@ import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QPaginatio
 import { QPagination } from 'quasar'
 
 export default function (ssrContext) {
-  return ComponentFactory({ ssrContext, name: 'QPagination', component: QPagination, state, mixin,
-    props: { 
-      value: {
-        type: Number,
-        required: true
-      }
-    }
-  })
+  return ComponentFactory({ ssrContext, name: 'QPagination', component: QPagination, state, mixin })
 }

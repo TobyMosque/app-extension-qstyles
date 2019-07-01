@@ -3,9 +3,5 @@ import state, { mixin } from 'quasar-app-extension-qstyles/src/styles/QExpansion
 import { QExpansionItem } from 'quasar'
 
 export default function (ssrContext) {
-  return ComponentFactory({ ssrContext, name: 'QExpansionItem', component: QExpansionItem, state, mixin,
-    props: {
-      value: Boolean
-    }
-  })
+  return ComponentFactory({ ssrContext, name: 'QExpansionItem', component: QExpansionItem, state, mixin })
 }
