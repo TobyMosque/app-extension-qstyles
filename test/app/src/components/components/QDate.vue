@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'QDate',
+  name: 'QDateDemo',
   data () {
     return {
       date: '2019/02/01'

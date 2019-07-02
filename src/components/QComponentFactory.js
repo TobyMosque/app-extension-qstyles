@@ -11,6 +11,11 @@ export default function ({ ssrContext, name, component, state, mixin }) {
     let propKeys = Object.keys(component.options.props)
     let stateKeys = Object.keys(state)
     let props = propKeys.filter(key => stateKeys.indexOf(key) === -1)
+    let others = propKeys.filter(key => stateKeys.indexOf(key) !== -1).reduce((others, key) => {
+      others[key] = component.options.props[key]
+      return others
+    }, {})
+    console.log(name, others)
     
     for (let index in props) {
       let name = props[index]
@@ -48,9 +53,6 @@ export default function ({ ssrContext, name, component, state, mixin }) {
     for (let key in component.options.methods) {
       let methodName = key
       wrapper.methods[methodName] = function () {
-        if (['QMenu', 'QPopupProxy', 'QTooltip'].indexOf(name) !== -1) {
-          console.log(name, methodName, arguments)
-        }
         this.$refs.root[methodName].apply(this.$refs.root, arguments)
       }
     }
@@ -61,6 +63,13 @@ export default function ({ ssrContext, name, component, state, mixin }) {
     let attrs = self.__getAttrs(self, state, this.$attrs)
     let { ...scopedSlots } = this.$scopedSlots
     let classes = this.__class
+    let options = {
+      ref: 'root',
+      key: this.$vnode.key,
+      attrs: attrs,
+      class: classes,
+      scopedSlots: scopedSlots
+    }
     if (wrapper.props.value) {
       let { input, ...listeners } = this.$listeners
       let { value, ...qProps } = this.$props || {}
@@ -68,26 +77,15 @@ export default function ({ ssrContext, name, component, state, mixin }) {
       listeners.input = (value) => {
         self.__value = value
       }
-      return h(component, {
-        ref: 'root',
-        props: qProps,
-        attrs: attrs,
-        class: classes,
-        on: listeners,
-        scopedSlots: scopedSlots
-      })
+      options.props = qProps
+      options.on = listeners
     } else {
       let { ...listeners } = this.$listeners
       let { ...qProps } = this.$props || {}
-      return h(component, {
-        ref: 'root',
-        props: qProps,
-        attrs: attrs,
-        class: classes,
-        on: listeners,
-        scopedSlots: scopedSlots
-      })
+      options.props = qProps
+      options.on = listeners
     }
+    return h(component, options)
   }
 
   return Vue.extend(wrapper)
