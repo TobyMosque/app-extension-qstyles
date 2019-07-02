@@ -7,6 +7,18 @@ export default function ({ ssrContext, name, component, state, mixin }) {
   }
 
   wrapper.props = {}
+  wrapper.mounted = function () {
+    // let emit = {
+    //   root: this.$refs.root.$emit,
+    //   self: this.$emit
+    // }
+    // this.$on = (...args) => {
+    //   emit.root.apply(this, args)
+    // }
+    // this.$refs.root.$emit = (...args) => {
+    //   emit.self.apply(this, args)
+    // }
+  }
   if (component.options.props) {
     let propKeys = Object.keys(component.options.props)
     let stateKeys = Object.keys(state)
@@ -15,7 +27,6 @@ export default function ({ ssrContext, name, component, state, mixin }) {
       others[key] = component.options.props[key]
       return others
     }, {})
-    console.log(name, others)
     
     for (let index in props) {
       let name = props[index]
